@@ -33,12 +33,12 @@ public class Posts extends BaseTimeEntity{
 	// auto matching column
 	private String author;
 	
-	//private String thumbnail;
-	
-	private int likeCnt;
-	private int commentCnt;
-	private int viewCnt;
 	private String hashtag;
+	
+	//private String thumbnail;
+	//private int likeCnt;
+	//private int commentCnt;
+	//private int viewCnt;
 	
 	// 생성자 상단에 선언시 생성자에 포함된 필드만 빌더에 포함
 	@Builder

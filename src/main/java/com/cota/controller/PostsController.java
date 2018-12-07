@@ -39,8 +39,7 @@ public class PostsController {
         String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase(); 
         File destinationFile; 
         String destinationFileName; 
-        //String fileUrl = "/home/ec2-user/app/img/";
-        String fileUrl = "/Users/gimseonghun/Documents";
+        String fileUrl = "/home/ec2-user/app/img/";
         
         do { 
             destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
