@@ -1,6 +1,10 @@
 spring:
   profiles:
     active: local # 기본 환경 선택
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
 
 # local 환경
 ---
@@ -13,3 +17,8 @@ spring:
   h2:
     console:
       enabled: true
+# 운영 환경 (AWS)
+---
+spring:
+  profiles: real
+spring.profiles.include: real-db
