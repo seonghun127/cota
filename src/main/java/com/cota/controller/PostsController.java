@@ -39,17 +39,18 @@ public class PostsController {
         String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase(); 
         File destinationFile; 
         String destinationFileName; 
+        String file;
         String fileUrl = "/home/ec2-user/app/img/";
         
         do { 
             destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
-            String file = fileUrl + destinationFileName;
+            file = fileUrl + destinationFileName;
             destinationFile = new File(file); 
         } while (destinationFile.exists()); 
         
         destinationFile.getParentFile().mkdirs(); 
         files.transferTo(destinationFile);
 
-        return "file";
+        return file;
     }
 }
