@@ -4,8 +4,11 @@ import java.io.File;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,19 +25,21 @@ public class PostsController {
 	
 	private PostsService postsService;
 	
-	@GetMapping("/")
+	/* @GetMapping("/")
 	public String index() {
 		return "index";
-	}
+	} */
 	
+	@CrossOrigin
 	@PostMapping("/save")
 	public Long savePosts(@RequestBody PostsSaveDto dto) {
 		return postsService.save(dto);
 	}
 	
+	@CrossOrigin
 	@PostMapping("/insertImage")
     private String boardInsertProc(@RequestPart MultipartFile files) throws Exception{
-        
+		
         String fileName = files.getOriginalFilename(); 
         String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase(); 
         File destinationFile; 
