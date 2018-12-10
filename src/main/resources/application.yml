@@ -21,4 +21,6 @@ spring:
 ---
 spring:
   profiles: real
+server:
+  port: 3001
 spring.profiles.include: real-db
