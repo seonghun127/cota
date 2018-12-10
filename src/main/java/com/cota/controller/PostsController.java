@@ -63,11 +63,11 @@ public class PostsController {
     }
 	
 	@CrossOrigin
-	@PostMapping("/{fileUri}")
+	@GetMapping("/{fileUri}")
 	private String getImage(@PathVariable String fileUri) {
 		String ec2 = "http://ec2-52-78-219-93.ap-northeast-2.compute.amazonaws.com:3001";
-		
-		return ec2 + fileUri;
+		System.out.println("hello world!");
+		return ec2 +"/"+ fileUri;
 	}
 	
 	@NoArgsConstructor
