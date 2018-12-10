@@ -7,6 +7,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,9 +63,11 @@ public class PostsController {
     }
 	
 	@CrossOrigin
-	@PostMapping("/getImage")
-	private String getImage(@RequestBody String fileUrl) {
-		return fileUrl;
+	@PostMapping("/{fileUri}")
+	private String getImage(@PathVariable String fileUri) {
+		String ec2 = "http://ec2-52-78-219-93.ap-northeast-2.compute.amazonaws.com:3001";
+		
+		return ec2 + fileUri;
 	}
 	
 	@NoArgsConstructor
