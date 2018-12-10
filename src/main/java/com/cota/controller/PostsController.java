@@ -18,6 +18,8 @@ import com.cota.dto.PostsSaveDto;
 import com.cota.service.PostsService;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @RestController
 @AllArgsConstructor
@@ -57,5 +59,24 @@ public class PostsController {
         files.transferTo(destinationFile);
 
         return file;
+    }
+	
+	@CrossOrigin
+	@PostMapping("/getImage")
+	private String getImage(@RequestBody String fileUrl) {
+		return fileUrl;
+	}
+	
+	@NoArgsConstructor
+    @Data
+    private static class UploadAttachmentResponse {
+
+        private String fileName;
+
+        private long fileSize;
+
+        private String fileContentType;
+
+        private String attachmentUrl;
     }
 }
