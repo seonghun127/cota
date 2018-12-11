@@ -1,6 +1,7 @@
 package com.cota.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -10,6 +11,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,15 +50,16 @@ public class PostsController {
 	}
 	
 	@CrossOrigin
-	@PostMapping(value = "/insertImage", produces = MediaType.IMAGE_JPEG_VALUE)
-    private ResponseEntity<byte[]> getImage(@RequestPart MultipartFile files) throws Exception{
+	@GetMapping(value = "/insertImage", produces = MediaType.IMAGE_JPEG_VALUE)
+    private ResponseEntity<byte[]> boardInsertProc(@RequestPart MultipartFile files) throws Exception{
 		
         String fileName = files.getOriginalFilename(); 
         String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase(); 
         File destinationFile; 
         String destinationFileName; 
         String file;
-        String fileUrl = "/static/images/";
+        //String fileUrl = "/Users/gimseonghun/Documents/springboot/cota/src/main/resources/static/images/";
+        String fileUrl = "/home/ec2-user/app/img/";
         
         do { 
             destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
@@ -64,21 +68,25 @@ public class PostsController {
         } while (destinationFile.exists()); 
         
         destinationFile.getParentFile().mkdirs(); 
+        
         files.transferTo(destinationFile);
 
-        ClassPathResource imgFile = new ClassPathResource(file);
-        byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
-
+        //ClassPathResource imgFile = new ClassPathResource("/static/images/"+destinationFileName);
+        
+        //byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
+        InputStream in = new FileInputStream(file);
+        byte[] bytes2 = IOUtils.toByteArray(in);
+        
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.IMAGE_JPEG)
-                .body(bytes);
+                .body(bytes2);
     }
 	
-	@GetMapping(value = "/sid", produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<byte[]> getImage() throws IOException {
+	@GetMapping(value = "/getImage/{fileName}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> getImage(@PathVariable String fileName) throws IOException {
 
-        ClassPathResource imgFile = new ClassPathResource("/static/images/cat.jpg");
+        ClassPathResource imgFile = new ClassPathResource("/static/images/"+fileName);
         byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
 
         return ResponseEntity
