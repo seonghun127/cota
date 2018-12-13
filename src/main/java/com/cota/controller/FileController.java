@@ -37,10 +37,10 @@ public class FileController {
 	
 	// 로컬 경로
 	//private static final String UPLOAD_PATH = 
-	//		"/Users/gimseonghun/Documents/springboot/cota/src/main/resources/static/images/";
+	//		"/Users/gimseonghun/Documents/springboot/cota/src/main/resources/static/images";
 	
 	// 운영 서버 경로
-	private static final String UPLOAD_PATH = "/home/ec2-user/app/img/";
+	private static final String UPLOAD_PATH = "/home/ec2-user/cota/travis/build/src/main/resources/static/images";
 	
 	
     // ------------------------------------------------------------------------------ //
@@ -118,7 +118,7 @@ public class FileController {
   	// ------------------------------------------------------------------------------ //
   	
   	/**
-  	 * multipartFile로 이미지를 받고 썸네일 이미지로 변환 후 리턴 메소드
+  	 * multipartFile로 이미지를 받고 썸네일 이미지로 변환 후 리턴 메소드 (수정)
   	 * @param file
   	 * @return
   	 * @throws Exception

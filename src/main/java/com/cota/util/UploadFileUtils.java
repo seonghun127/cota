@@ -51,17 +51,20 @@ public class UploadFileUtils {
 		
 		String formatName = originalName.substring(originalName.lastIndexOf(".")+1);
 		
+		logger.info("formatName is "+formatName);
+		
+		String uploadedFileName = uploadPath + savedPath + File.separator + savedName;
+		
+		/*//파일의 확장자에 따라 썸네일(이미지일경우) 또는 아이콘을 생성함.
 		String uploadedFileName = null;
 		
-		//파일의 확장자에 따라 썸네일(이미지일경우) 또는 아이콘을 생성함.
 		if(MediaUtils.getMediaType(formatName) != null) {
 			uploadedFileName = makeThumbnail(uploadPath, savedPath, savedName);
 		}else {
 			uploadedFileName = makeIcon(uploadPath, savedPath, savedName);
-		}
+		}*/
 		
-		//uploadedFileName는 썸네일명으로 화면에 전달된다.
-		return uploadedFileName;
+		return uploadedFileName.substring(uploadPath.length()).replace(File.separatorChar, '/');
 	}//
 	
 	// ------------------------------------------------------------------------------ //
