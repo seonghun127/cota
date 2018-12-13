@@ -40,7 +40,8 @@ public class FileController {
 	//		"/Users/gimseonghun/Documents/springboot/cota/src/main/resources/static/images";
 	
 	// 운영 서버 경로
-	private static final String UPLOAD_PATH = "/home/ec2-user/cota/travis/build/src/main/resources/static/images";
+	//private static final String UPLOAD_PATH = "/home/ec2-user/cota/travis/build/src/main/resources/static/images";
+	private static final String UPLOAD_PATH = "/home/ec2-user/cota/img/uploadedFiles";
 	
 	
     // ------------------------------------------------------------------------------ //
