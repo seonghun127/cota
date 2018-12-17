@@ -29,10 +29,8 @@ public class Repositorys implements Serializable{
 	*/
 	
 	@Id
-	@Column(name="r_uno")
 	private Long rUno;
 	
 	@Id
-	@Column(name="r_pno")
 	private Long rPno;
 }

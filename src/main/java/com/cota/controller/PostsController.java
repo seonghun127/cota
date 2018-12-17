@@ -1,5 +1,6 @@
 package com.cota.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -42,11 +43,7 @@ public class PostsController {
 		
 		logger.info("PostsSaveDto : " + dto);
 		
-		logger.info("dto.getpContent is  " + dto.getPContent());
-		
 		Long pNo = postsService.save(dto);
-		
-		logger.info("pNo : "+pNo);
 		
 		HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/posts/{pNo}").buildAndExpand(pNo).toUri());
@@ -73,5 +70,14 @@ public class PostsController {
     }
 	
 	// ------------------------------------------------------------------------------ //
-
+	
+	
+	@CrossOrigin
+	@PostMapping(value = "list")
+    public ResponseEntity<?> getPostList() {
+        
+		List<Posts> list = postsService.findAll();
+        
+        return new ResponseEntity<List<Posts>>(list, HttpStatus.OK);
+    }
 }

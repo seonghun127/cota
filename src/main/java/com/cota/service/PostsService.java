@@ -1,5 +1,6 @@
 package com.cota.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -34,5 +35,10 @@ public class PostsService {
     @Transactional
     public Optional<Posts> findById(Long pNo) {
     	return postsRepository.findById(pNo);
+    }
+    
+    @Transactional
+    public List<Posts> findAll() {
+    	return postsRepository.findAll();
     }
 }

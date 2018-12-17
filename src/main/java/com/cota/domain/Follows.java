@@ -29,10 +29,8 @@ public class Follows implements Serializable{
 	*/
 	
 	@Id
-	@Column(name = "f_follower_no")
 	private Long fFollwerNo;
 	
 	@Id
-	@Column(name = "f_followed_no")
 	private Long fFollowedNo;
 }

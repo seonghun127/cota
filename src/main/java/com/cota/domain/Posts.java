@@ -40,16 +40,21 @@ public class Posts extends BaseTimeEntity{
 	
 	// re-configure column to use usefully in JAVA
 	//@Column(name = "p_title")
+	@Column(nullable = false)
 	private String pTitle;
 	
+	@Column(nullable = false)
 	private Long pUno;
 	
 	// re-configure column to  use more useful in JAVA (example)
 	//@Column(columnDefinition="TEXT", nullable = false)
+	@Column(nullable = false)
 	private String pContent;
 	
+	@Column(nullable = false)
 	private String pHashtag;
 	
+	@Column(nullable = false)
 	private String pThumbnail;
 	
 	private int pLikeCnt;

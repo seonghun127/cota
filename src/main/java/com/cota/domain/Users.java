@@ -34,22 +34,21 @@ public class Users{
 	 * */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="u_no")
 	private Long uNo;
 	
-	@Column(name = "u_name", nullable = false)
+	@Column(nullable = false)
 	private String uName;
 	
-	@Column(name = "u_email", nullable = false)
+	@Column(nullable = false)
 	private String uEmail;
 	
-	@Column(name = "u_password", nullable = false)
+	@Column(nullable = false)
 	private String uPassword;
 	
-	@Column(name = "u_sex", nullable = false)
+	@Column(nullable = false)
 	private boolean uSex;
 	
-	@Column(name = "u_birth", nullable = false)
+	@Column(nullable = false)
 	private Date uBirth;
 	
 	

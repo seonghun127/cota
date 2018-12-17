@@ -34,16 +34,15 @@ public class Likes{
 	@Id	// PK
 	// configure auto-increment option to PK in mysql
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "l_no")
 	private Long lNo;
 	
-	@Column(name = "l_pno", nullable = false)
+	@Column(nullable = false)
 	private Long lPno;
 	
-	@Column(name = "l_uno", nullable = false)
+	@Column(nullable = false)
 	private Long lUno;
 	
-	@Column(name = "l_check", nullable = false)
+	@Column(nullable = false)
 	private boolean lCheck;
 	
 	@Builder
@@ -52,5 +51,4 @@ public class Likes{
 		this.lUno = lUno;
 		this.lCheck = lCheck;
 	}
-	
 }

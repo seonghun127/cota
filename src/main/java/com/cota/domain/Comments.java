@@ -34,17 +34,16 @@ public class Comments extends BaseTimeEntity{
 	
 	@Id	// PK
 	// configure auto-increment option to PK in mysql
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "c_no")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)@Column(name = "c_no")
 	private Long cNo;
 	
-	@Column(name = "c_content", nullable = false)
+	@Column(nullable = false)
 	private String cContent;
 	
-	@Column(name = "c_pno", nullable = false)
+	@Column(nullable = false)
 	private Long cPno;
 	
-	@Column(name = "c_uno", nullable = false)
+	@Column(nullable = false)
 	private String cUno;
 	
 	@Builder
