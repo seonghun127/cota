@@ -2,6 +2,7 @@ package com.cota.dto;
 
 import com.cota.domain.Posts;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,17 +12,28 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PostsSaveDto{
 	
-	private String title;
-	private String content;
-	private String author;
-	private String hashtag;
+	private String pTitle;
+	private String pContent;
+	private Long pUno;
+	private String pHashtag;
+	private String pThumbnail;
 	
 	public Posts toEntity(){
         return Posts.builder()
-                .title(title)
-                .content(content)
-                .author(author)
-                .hashtag(hashtag)
+                .pTitle(pTitle)
+                .pContent(pContent)
+                .pUno(pUno)
+                .pHashtag(pHashtag)
+                .pThumbnail(pThumbnail)
                 .build();
     }
+	
+	@Builder
+	public PostsSaveDto(String pTitle, String pContent, Long pUno, String pHashtag, String pThumbnail) {
+		this.pTitle = pTitle;
+		this.pContent = pContent;
+		this.pUno = pUno;
+		this.pHashtag = pHashtag;
+		this.pThumbnail = pThumbnail;
+	}
 }

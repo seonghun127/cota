@@ -21,6 +21,7 @@ spring:
   h2:
     console:
       enabled: true
+      
 # 운영 환경 (AWS)
 ---
 spring:
