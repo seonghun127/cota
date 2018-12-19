@@ -106,7 +106,7 @@ public class PostsController {
     		@PathVariable("rowNum") int rowNum, HttpServletRequest request) {
         
 		HttpSession session = request.getSession();
-		Map<String, String> param = new HashMap<String, String>();
+		Map<String, Object> param = new HashMap<String, Object>();
 		
 		param.put("category", StringUtil.nvl(category, "recent"));
 		param.put("rowNum", StringUtil.nvl(rowNum, "0"));

@@ -36,7 +36,7 @@ public class PostsService {
     }
     
     @Transactional
-    public List<PostsListDto> findAll(Map<String, String> param) {
+    public List<PostsListDto> findAll(Map<String, Object> param) {
     	return postsMapper.retrieveAllAsPostsListDto(param);
     }
     
