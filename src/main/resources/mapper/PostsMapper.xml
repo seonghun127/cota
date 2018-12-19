@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+ <!-- use mybatis to 'READ' database -->
+<mapper namespace="com.cota.mapper.PostsMapper">
+ 
+ 	<!-- test query for mybatis connection -->
+    <select id="postsCount" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM posts
+    </select>
+    
+    <!-- read data for card_list -->
+    <select id="retrieveAllAsPostsListDto" parameterType="String" resultType="com.cota.dto.PostsListDto">
+    	SELECT 
+    		p_title,
+    		p_uno, 
+    		modified_date, 
+    		p_thumbnail, 
+    		p_like_cnt, 
+    		p_comment_cnt, 
+    		p_view_cnt
+    	FROM posts
+    	<choose> 
+    		<when test="category == 'recent'"> 
+    			ORDER BY modified_date DESC, p_like_cnt DESC
+    		</when> 
+    		<when test="category == 'best'">
+    			ORDER BY p_like_cnt DESC, modified_date DESC
+    		</when>
+    		<when test="category == 'save'">
+				WHERE p_no IN (SELECT r_pno FROM repositorys WHERE r_uno=#{uNo})
+				ORDER BY modified_date DESC, p_like_cnt DESC
+    		</when>
+    		<when test="category == 'follow'">
+    			WHERE p_uno IN (SELECT f_follewed_no FROM follows WHERE f_follower_no = #{uNo})
+    			ORDER BY modified_date DESC, p_like_cnt DESC
+    		</when>
+    	</choose>
+		LIMIT #{rowNum} , 10
+    </select>
+    
+</mapper>

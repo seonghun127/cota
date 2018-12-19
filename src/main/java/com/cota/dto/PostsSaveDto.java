@@ -18,6 +18,7 @@ public class PostsSaveDto{
 	private String pHashtag;
 	private String pThumbnail;
 	
+	// change java entity to data entity for using repository method
 	public Posts toEntity(){
         return Posts.builder()
                 .pTitle(pTitle)

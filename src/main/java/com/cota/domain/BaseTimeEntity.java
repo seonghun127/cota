@@ -17,7 +17,7 @@ import lombok.Getter;
 @MappedSuperclass
 //import auditing function
 @EntityListeners(AuditingEntityListener.class)
-public class BaseTimeEntity {
+public abstract class BaseTimeEntity {
 
 	// save that time automatically whenever entity is saved
 	@CreatedDate
