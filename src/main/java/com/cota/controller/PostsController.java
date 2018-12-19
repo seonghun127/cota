@@ -109,7 +109,7 @@ public class PostsController {
 		Map<String, Object> param = new HashMap<String, Object>();
 		
 		param.put("category", StringUtil.nvl(category, "recent"));
-		param.put("rowNum", StringUtil.nvl(rowNum, "0"));
+		param.put("rowNum", rowNum);
 		param.put("uNo", StringUtil.nvl(session.getAttribute("uNo"), ""));
 
 		List<PostsListDto> list = postsService.findAll(param);
