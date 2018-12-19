@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     			ORDER BY modified_date DESC, p_like_cnt DESC
     		</when>
     	</choose>
-		LIMIT #{rowNum} , 10
+		LIMIT #{rowNum, jdbcType=NUMERIC} , 10
     </select>
     
     <select id="getLikeCheck" parameterType="String" resultType="boolean">
