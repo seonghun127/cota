@@ -1,6 +1,5 @@
 package com.cota.controller;
 
-import java.awt.print.Pageable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -98,8 +96,6 @@ public class PostsController {
 		param.put("rowNum", StringUtil.nvl(rowNum, "0"));
 		param.put("uNo", StringUtil.nvl(session.getAttribute("uNo"), ""));
 
-		// 로그인된 사용자 번호 Map 에 저장 + 페이징 처리해야할 값 Map에 저장 부분 처리해야 함.
-		
 		List<PostsListDto> list = postsService.findAll(param);
         
         return new ResponseEntity<List<PostsListDto>>(list, HttpStatus.OK);
