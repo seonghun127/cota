@@ -11,11 +11,18 @@ import com.cota.dto.PostsListDto;
 public interface PostsMapper {
 	
 	// test method for mybatis connection
-	public int postsCount();
+	int postsCount();
 	
 	// read data for card_list
-	public List<PostsListDto> retrieveAllAsPostsListDto(Map<String, String> param);
+	List<PostsListDto> retrieveAllAsPostsListDto(Map<String, String> param);
 	
+	// check like status
+	boolean getLikeCheck(Map<String, String> param); 
 	
+	// check follow status
+	boolean getFollowCheck(Map<String, String> param);
+	
+	// check repository status
+	boolean getRepositoryCheck(Map<String, String> param);
 
 }

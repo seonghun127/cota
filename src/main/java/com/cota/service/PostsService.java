@@ -41,6 +41,21 @@ public class PostsService {
     }
     
     @Transactional
+    public boolean getLikeCheck(Map<String, String> param) {
+    	return postsMapper.getLikeCheck(param);
+    }
+    
+    @Transactional
+    public boolean getFollowCheck(Map<String, String> param) {
+    	return postsMapper.getFollowCheck(param);
+    }
+    
+    @Transactional
+    public boolean getRepositoryCheck(Map<String, String> param) {
+    	return postsMapper.getRepositoryCheck(param);
+    }
+    
+    @Transactional
     public int getCount() {
     	return postsMapper.postsCount();
     }

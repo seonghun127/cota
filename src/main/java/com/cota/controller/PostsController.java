@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,13 +70,28 @@ public class PostsController {
 	 */
 	@CrossOrigin
 	@GetMapping(value = "/posts/{pNo}")
-    public ResponseEntity<?> getPost(@PathVariable("pNo") long pNo) {
+    public ResponseEntity<?> getPost(@PathVariable("pNo") long pNo, Model model,
+    		HttpServletRequest request) {
         
 		logger.info("Fetching Posts with pNo {}", pNo);
+		
+		HttpSession session = request.getSession();
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("pNo", Long.toString(pNo));
+		param.put("uNo", StringUtil.nvl(session.getAttribute("uNo"), ""));
         
 		Optional<Posts> posts = postsService.findById(pNo);
-        
-        return new ResponseEntity<Optional<Posts>>(posts, HttpStatus.OK);
+		
+		boolean lCheck = postsService.getLikeCheck(param);
+		boolean fCheck = postsService.getFollowCheck(param);
+		boolean rCheck = postsService.getRepositoryCheck(param);
+		
+		model.addAttribute("posts", posts);
+		model.addAttribute("lCheck", lCheck);
+		model.addAttribute("fCheck", fCheck);
+		model.addAttribute("rCheck", rCheck);
+		
+        return new ResponseEntity<>(model, HttpStatus.OK);
     }
 
 	// ------------------------------------------------------------------------------ //
