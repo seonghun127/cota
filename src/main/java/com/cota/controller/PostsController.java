@@ -77,6 +77,7 @@ public class PostsController {
 		
 		HttpSession session = request.getSession();
 		Map<String, String> param = new HashMap<String, String>();
+		
 		param.put("pNo", Long.toString(pNo));
 		param.put("uNo", StringUtil.nvl(session.getAttribute("uNo"), ""));
         

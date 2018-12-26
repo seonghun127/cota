@@ -17,6 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <!-- read data for card_list -->
     <select id="retrieveAllAsPostsListDto" resultType="com.cota.dto.PostsListDto">
     	SELECT 
+    		p_no,
     		p_title,
     		p_uno, 
     		modified_date, 

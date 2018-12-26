@@ -11,6 +11,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PostsListDto{
 	
+	// unlike PostsDetailDto class, this class is used along with mybatis.
+	// to retrieve optional column data, 'post list' need the return type of this class.
+	
+	private Long pNo;
 	private String pTitle;
 	private Long pUno;
 	private Date modifiedDate;
