@@ -1,5 +1,7 @@
 package com.cota.dto;
 
+import java.util.Date;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +24,8 @@ public class PostsDetailDto {
 	private String pContent;
 	
 	private String pHashtag;
+	
+	private Date modifiedDate;
 	
 	private String pThumbnail;
 	

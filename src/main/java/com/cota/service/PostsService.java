@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 import com.cota.domain.Posts;
+import com.cota.dto.PostsDetailDto;
 import com.cota.dto.PostsListDto;
 import com.cota.dto.PostsSaveDto;
 import com.cota.mapper.PostsMapper;
@@ -31,9 +32,27 @@ public class PostsService {
     }
     
     @Transactional
+    public void updateViewCount(Long pNo){
+        postsRepository.updateViewCount(pNo);
+    }
+    
+    @Transactional
     public Optional<Posts> findById(Long pNo) {
     	return postsRepository.findById(pNo);
     }
+    
+    @Transactional
+    public void updatePosts(Long pNo, String pTitle, String pContent,
+    		String pHashtag, String pThumbnail) {
+    	postsRepository.updatePosts(pNo, pTitle, pContent, pHashtag, pThumbnail);
+    }
+    
+    @Transactional
+    public void deletePostsById(Long pNo) {
+    	postsRepository.deleteById(pNo);
+    }
+    
+    // ------------------------------------------------------------------------------ //
     
     @Transactional
     public List<PostsListDto> findAll(Map<String, Object> param) {

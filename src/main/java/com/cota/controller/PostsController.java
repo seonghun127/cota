@@ -15,9 +15,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -25,6 +27,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.cota.domain.Posts;
 import com.cota.dto.PostsListDto;
 import com.cota.dto.PostsSaveDto;
+import com.cota.dto.PostsUpdateDto;
 import com.cota.service.PostsService;
 import com.cota.util.StringUtil;
 
@@ -64,6 +67,48 @@ public class PostsController {
 	// ------------------------------------------------------------------------------ //
 	
 	/**
+	 * update posts
+	 * @param pNo
+	 * @param dto
+	 * @param ucBuilder
+	 * @return
+	 */
+	@PutMapping("/posts/{pNo}")
+    public ResponseEntity<?> updateUser(@PathVariable("pNo") long pNo, @RequestBody PostsUpdateDto dto,
+    		UriComponentsBuilder ucBuilder) {
+        logger.info("Updating Posts with pNo {}", pNo);
+ 
+        String pTitle = dto.getPTitle();
+        String pContent = dto.getPContent();
+        String pHashtag = dto.getPHashtag();
+        String pThumbnail = dto.getPThumbnail();
+        
+        postsService.updatePosts(pNo, pTitle, pContent, pHashtag, pThumbnail);
+        
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/posts/{pNo}").buildAndExpand(pNo).toUri());
+       
+        return new ResponseEntity<String>(headers, HttpStatus.OK);
+    }
+	
+	// ------------------------------------------------------------------------------ //
+	
+	/**
+	 * delete posts
+	 * @param pNo
+	 * @return
+	 */
+	@DeleteMapping(value = "/posts/{pNo}")
+    public ResponseEntity<?> deleteUser(@PathVariable("pNo") long pNo) {
+        logger.info("Fetching & Deleting Posts with pNo {}", pNo);
+       
+        postsService.deletePostsById(pNo);
+        return new ResponseEntity<Posts>(HttpStatus.NO_CONTENT);
+    }
+	
+	// ------------------------------------------------------------------------------ //
+	
+	/**
 	 * get one post (detail)
 	 * @param pNo
 	 * @return
@@ -80,7 +125,11 @@ public class PostsController {
 		
 		param.put("pNo", Long.toString(pNo));
 		param.put("uNo", StringUtil.nvl(session.getAttribute("uNo"), ""));
+		
+		// view count +1
+		postsService.updateViewCount(pNo);
         
+		// retrieve post detail
 		Optional<Posts> posts = postsService.findById(pNo);
 		
 		boolean lCheck = postsService.getLikeCheck(param);
