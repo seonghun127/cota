@@ -76,6 +76,7 @@ public class NaverLoginBO {
 
     /* http session에서 데이터 가져오기 */ 
     private String getSession(HttpSession session){
+    	System.out.println("여기는 getSession!");
         return (String) session.getAttribute(SESSION_STATE);
     }
     /* Access Token을 이용하여 네이버 사용자 프로필 API를 호출 */
