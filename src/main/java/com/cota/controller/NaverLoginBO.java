@@ -49,7 +49,7 @@ public class NaverLoginBO {
 
         /* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
         String sessionState = getSession(session);
-        System.out.println("session is "+sessionState);
+        System.out.println("At getAccessToken session is "+getSession(session));
         if(StringUtils.pathEquals(sessionState, state)){
 
             OAuth20Service oauthService = new ServiceBuilder()
