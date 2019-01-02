@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
@@ -49,7 +51,8 @@ public class LoginController {
 	//네이버 로그인 성공시 callback호출 메소드
 	@CrossOrigin
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
-	public ResponseEntity<?> callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+	public ResponseEntity<?> callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session
+			,UriComponentsBuilder ucBuilder)
 			throws IOException {
 		System.out.println("여기는 callback");
 		OAuth2AccessToken oauthToken;
@@ -57,7 +60,10 @@ public class LoginController {
         //로그인 사용자 정보를 읽어온다.
 	    apiResult = naverLoginBO.getUserProfile(oauthToken);
 		model.addAttribute("result", apiResult);
+		
+		HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(ucBuilder.path("/list/recent/0").buildAndExpand().toUri());
 
-		return new ResponseEntity<>(model, HttpStatus.OK);
+		return new ResponseEntity<>(headers, HttpStatus.OK);
 	}
 }
