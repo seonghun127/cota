@@ -60,10 +60,7 @@ public class LoginController {
         //로그인 사용자 정보를 읽어온다.
 	    apiResult = naverLoginBO.getUserProfile(oauthToken);
 		model.addAttribute("result", apiResult);
-		
-		HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/list/recent/0").buildAndExpand().toUri());
 
-		return new ResponseEntity<>(headers, HttpStatus.OK);
+		return new ResponseEntity<>(model, HttpStatus.OK);
 	}
 }
