@@ -19,10 +19,10 @@ public class NaverLoginBO {
 	private final static String CLIENT_ID = "0TP1EkDpR8pEeRbIUxNs";
     private final static String CLIENT_SECRET = "JwaTSMtphW";
     private final static String REDIRECT_URI = "http://ec2-52-78-219-93.ap-northeast-2.compute.amazonaws.com:3001/callback";
-    //private final static String SESSION_STATE = "oauth_state";
+    private final static String SESSION_STATE = "oauth_state";
     /* 프로필 조회 API URL */
     private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
-    private String session_state = "oauth_state";
+    
     
     /* 네이버 아이디로 인증 URL 생성  Method */
     public String getAuthorizationUrl(HttpSession session) {
@@ -31,7 +31,7 @@ public class NaverLoginBO {
         String state = generateRandomString();
         /* 생성한 난수 값을 session에 저장 */
         setSession(session,state);
-        System.out.println("At getAuthorizationUrl session is "+session_state);
+        System.out.println("At getAuthorizationUrl session is "+SESSION_STATE);
 
         /* Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성 */
         OAuth20Service oauthService = new ServiceBuilder()                                                   
@@ -49,7 +49,7 @@ public class NaverLoginBO {
 
         /* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
         String sessionState = getSession(session);
-        System.out.println("session is "+session_state);
+        System.out.println("session is "+sessionState);
         if(StringUtils.pathEquals(sessionState, state)){
 
             OAuth20Service oauthService = new ServiceBuilder()
@@ -73,13 +73,12 @@ public class NaverLoginBO {
 
     /* http session에 데이터 저장 */
     private void setSession(HttpSession session,String state){
-        session.setAttribute(session_state, state);  
-        System.out.println("At setSession session is "+session_state);
+        session.setAttribute(SESSION_STATE, state);
     }
 
     /* http session에서 데이터 가져오기 */ 
     private String getSession(HttpSession session){
-        return (String) session.getAttribute(session_state);
+        return (String) session.getAttribute(SESSION_STATE);
     }
     /* Access Token을 이용하여 네이버 사용자 프로필 API를 호출 */
     public String getUserProfile(OAuth2AccessToken oauthToken) throws IOException{
