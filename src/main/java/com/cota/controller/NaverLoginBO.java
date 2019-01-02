@@ -29,7 +29,8 @@ public class NaverLoginBO {
         /* 세션 유효성 검증을 위하여 난수를 생성 */
         String state = generateRandomString();
         /* 생성한 난수 값을 session에 저장 */
-        setSession(session,state);        
+        setSession(session,state);
+        System.out.println("At getAuthorizationUrl session is "+SESSION_STATE);
 
         /* Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성 */
         OAuth20Service oauthService = new ServiceBuilder()                                                   
@@ -47,7 +48,7 @@ public class NaverLoginBO {
 
         /* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
         String sessionState = getSession(session);
-        System.out.println("sessionState : " + sessionState);
+        System.out.println("session is "+SESSION_STATE);
         if(StringUtils.pathEquals(sessionState, state)){
 
             OAuth20Service oauthService = new ServiceBuilder()
@@ -71,12 +72,12 @@ public class NaverLoginBO {
 
     /* http session에 데이터 저장 */
     private void setSession(HttpSession session,String state){
-        session.setAttribute(SESSION_STATE, state);     
+        session.setAttribute(SESSION_STATE, state);  
+        System.out.println("At setSession session is "+SESSION_STATE);
     }
 
     /* http session에서 데이터 가져오기 */ 
     private String getSession(HttpSession session){
-    	System.out.println("여기는 getSession!");
         return (String) session.getAttribute(SESSION_STATE);
     }
     /* Access Token을 이용하여 네이버 사용자 프로필 API를 호출 */
