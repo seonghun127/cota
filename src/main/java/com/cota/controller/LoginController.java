@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,7 @@ public class LoginController {
 	
 
 	//로그인 첫 화면 요청 메소드
+	@CrossOrigin
 	@RequestMapping(value = "/naverLogin", method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<?> login(Model model, HttpSession session) {
 		
@@ -45,6 +47,7 @@ public class LoginController {
 	}
 
 	//네이버 로그인 성공시 callback호출 메소드
+	@CrossOrigin
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<?> callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws IOException {
