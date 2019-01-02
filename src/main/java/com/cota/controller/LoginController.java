@@ -58,7 +58,6 @@ public class LoginController {
 	    apiResult = naverLoginBO.getUserProfile(oauthToken);
 		model.addAttribute("result", apiResult);
 
-        /* 네이버 로그인 성공 페이지 View 호출 */
 		return new ResponseEntity<>(model, HttpStatus.OK);
 	}
 }
