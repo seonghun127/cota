@@ -18,7 +18,7 @@ public class NaverLoginBO {
 	
 	private final static String CLIENT_ID = "0TP1EkDpR8pEeRbIUxNs";
     private final static String CLIENT_SECRET = "JwaTSMtphW";
-    private final static String REDIRECT_URI = "http://ec2-52-78-219-93.ap-northeast-2.compute.amazonaws.com:3001/list/recent/0";
+    private final static String REDIRECT_URI = "http://ec2-52-78-219-93.ap-northeast-2.compute.amazonaws.com:3001/callback";
     private final static String SESSION_STATE = "oauth_state";
     /* 프로필 조회 API URL */
     private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
