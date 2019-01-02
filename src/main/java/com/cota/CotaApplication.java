@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+
 @SpringBootApplication
 @EnableJpaAuditing	// execute JPA Auditing 
 @MapperScan(value= {"com.cota.mapper"})
@@ -21,4 +22,5 @@ public class CotaApplication {
         .properties(APPLICATION_LOCATIONS)
         .run(args);
 	}
+
 }
