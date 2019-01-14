@@ -45,22 +45,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		LIMIT #{rowNum, jdbcType=NUMERIC} , 10
     </select>
     
-    <select id="getLikeCheck" parameterType="String" resultType="boolean">
-    	SELECT IFNULL(l.l_check,0) AS l_check FROM posts AS p 
-    	LEFT JOIN (SELECT * FROM likes WHERE l_uno = #{uNo}) AS l ON p_no = l_pno
-		WHERE p_no = #{pNo};
-    </select>
-    
-    <select id="getFollowCheck" parameterType="String" resultType="boolean">
-    	SELECT IFNULL(f.f_check, 0) AS f_check FROM posts AS p 
-    	LEFT JOIN (SELECT * FROM follows WHERE f_follower_no = #{uNo}) AS f ON p_uno = f_followed_no
-    	WHERE p_no = #{pNo};
-    </select>
-    
-    <select id="getRepositoryCheck" parameterType="String" resultType="boolean">
-    	SELECT IFNULL(r.r_check, 0) AS r_check FROM posts AS p 
-    	LEFT JOIN (SELECT * FROM repositorys WHERE r_uno = #{uNo}) AS r ON r_pno = p_no
-		WHERE p_no = #{pNo};
-    </select>
-    
 </mapper>

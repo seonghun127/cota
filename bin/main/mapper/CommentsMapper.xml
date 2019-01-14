@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+ <!-- use mybatis to 'READ' database -->
+<mapper namespace="com.cota.mapper.CommentsMapper">
+
+    <select id="retrieveAllAsCommentsListDto" resultType = "com.cota.dto.CommentsListDto">
+        SELECT 
+            c_no,
+            c_content,
+            c_pno,
+            c_uno,
+            modified_date
+        FROM comments
+        WHERE c_pno = #{pNo}
+        LIMIT #{rowNum, jdbcType=NUMERIC} , 10
+    </select>
+
+</mapper>

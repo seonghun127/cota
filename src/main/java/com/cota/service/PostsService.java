@@ -26,6 +26,8 @@ public class PostsService {
     // mybatis
     private PostsMapper postsMapper;
 
+    // ------------------------------------JPA-------------------------------------- //
+
     @Transactional
     public Long save(PostsSaveDto dto){
         return postsRepository.save(dto.toEntity()).getPNo();
@@ -52,26 +54,11 @@ public class PostsService {
     	postsRepository.deleteById(pNo);
     }
     
-    // ------------------------------------------------------------------------------ //
+    // ----------------------------------Mybatis----------------------------------- //
     
     @Transactional
     public List<PostsListDto> findAll(Map<String, Object> param) {
     	return postsMapper.retrieveAllAsPostsListDto(param);
-    }
-    
-    @Transactional
-    public boolean getLikeCheck(Map<String, String> param) {
-    	return postsMapper.getLikeCheck(param);
-    }
-    
-    @Transactional
-    public boolean getFollowCheck(Map<String, String> param) {
-    	return postsMapper.getFollowCheck(param);
-    }
-    
-    @Transactional
-    public boolean getRepositoryCheck(Map<String, String> param) {
-    	return postsMapper.getRepositoryCheck(param);
     }
     
     @Transactional

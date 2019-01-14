@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -40,7 +42,7 @@ public class Comments extends BaseTimeEntity{
 	@Column(nullable = false)
 	private String cContent;
 	
-	@Column(nullable = false)
+	@Column
 	private Long cPno;
 	
 	@Column(nullable = false)

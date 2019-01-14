@@ -50,7 +50,8 @@ public class PostsController {
 	 */
 	@CrossOrigin
 	@PostMapping("/save")
-	public ResponseEntity<?> savePosts(@RequestBody PostsSaveDto dto, UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<?> savePosts(@RequestBody PostsSaveDto dto,
+	 UriComponentsBuilder ucBuilder) {
 		
 		logger.info("PostsSaveDto : " + dto);
 		
@@ -74,8 +75,8 @@ public class PostsController {
 	 * @return
 	 */
 	@PutMapping("/posts/{pNo}")
-    public ResponseEntity<?> updateUser(@PathVariable("pNo") long pNo, @RequestBody PostsUpdateDto dto,
-    		UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<?> updateUser(@PathVariable("pNo") long pNo, 
+		@RequestBody PostsUpdateDto dto, UriComponentsBuilder ucBuilder) {
         logger.info("Updating Posts with pNo {}", pNo);
  
         String pTitle = dto.getPTitle();
@@ -132,14 +133,7 @@ public class PostsController {
 		// retrieve post detail
 		Optional<Posts> posts = postsService.findById(pNo);
 		
-		boolean lCheck = postsService.getLikeCheck(param);
-		boolean fCheck = postsService.getFollowCheck(param);
-		boolean rCheck = postsService.getRepositoryCheck(param);
-		
 		model.addAttribute("posts", posts);
-		model.addAttribute("lCheck", lCheck);
-		model.addAttribute("fCheck", fCheck);
-		model.addAttribute("rCheck", rCheck);
 		
         return new ResponseEntity<>(model, HttpStatus.OK);
     }
