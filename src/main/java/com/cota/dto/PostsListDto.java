@@ -16,6 +16,7 @@ public class PostsListDto{
 	
 	private Long pNo;
 	private String pTitle;
+	private String pContent;
 	private String uName;
 	private String uEmail;
 	private Date modifiedDate;

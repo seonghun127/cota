@@ -13,6 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     		p.p_no,
     		p.p_title,
     		u.u_name,
+			p.p_content,
 			u.u_email,
     		modified_date, 
     		p.p_thumbnail
