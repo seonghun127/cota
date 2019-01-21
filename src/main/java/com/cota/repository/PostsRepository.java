@@ -5,21 +5,22 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 import com.cota.domain.Posts;
 
 public interface PostsRepository extends JpaRepository<Posts, Long> {
 	
-	@Modifying
-	@Query("UPDATE Posts p SET p.pViewCnt = p.pViewCnt + 1 WHERE p.pNo = :pNo")
-	void updateViewCount(@Param("pNo") Long pNo);
-	
+	// update post contents
 	@Modifying
 	@Query("UPDATE Posts p SET p.pTitle = :pTitle,"
 			+ "p.pContent = :pContent,"
-			+ "p.pHashtag = :pHashtag,"
 			+ "p.pThumbnail = :pThumbnail WHERE p.pNo = :pNo")
 	void updatePosts(@Param("pNo") Long pNo, @Param("pTitle") String pTitle,
-			@Param("pContent") String pContent, @Param("pHashtag") String pHashtag,
-			@Param("pThumbnail") String pThumbnail);
-
+			@Param("pContent") String pContent, @Param("pThumbnail") String pThumbnail);
+	
+	
+	// retrieve one post's details
+	@Query("SELECT p.pContent FROM Posts p WHERE p.pNo = :pNo")
+	Optional<Posts> findById(@Param("pNo")Long pNo);
 }

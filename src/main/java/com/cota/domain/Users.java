@@ -25,10 +25,7 @@ public class Users{
 		create table users(
 			u_no bigint not null auto_increment,
 			u_name varchar(255) not null,
-			u_email varchar(255) not null,
-			u_password varchar(255) not null,
-			u_sex tinyint(1) not null,
-			u_birth date not null,
+			u_email varchar(255) not null
 			primary key(u_no)
 		);
 	 * */
@@ -40,24 +37,12 @@ public class Users{
 	private String uName;
 	
 	@Column(nullable = false)
-	private String uEmail;
-	
-	@Column(nullable = false)
-	private String uPassword;
-	
-	@Column(nullable = false)
-	private boolean uSex;
-	
-	@Column(nullable = false)
-	private Date uBirth;
-	
+	private String uEmail;	
 	
 	@Builder
-	public Users(String uName, String uEmail, boolean uSex, Date uBirth) {
+	public Users(String uName, String uEmail) {
 		this.uName = uName;
 		this.uEmail = uEmail;
-		this.uSex = uSex;
-		this.uBirth = uBirth;
 	}
 	
 	

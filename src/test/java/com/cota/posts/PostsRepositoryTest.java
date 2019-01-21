@@ -44,7 +44,6 @@ public class PostsRepositoryTest {
     			.pTitle("게시글 제목")
                 .pContent("게시글 내용")
                 .pUno(1234l)
-                .pHashtag("해시태그")
                 .pThumbnail("썸네일 주소")
                 .build();
     	

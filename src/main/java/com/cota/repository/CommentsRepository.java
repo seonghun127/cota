@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface CommentsRepository extends JpaRepository<Comments, Long>{
  
+	// update comments
     @Modifying
 	@Query("UPDATE Comments c SET c.cContent = :cContent"
 			+ " WHERE c.cNo = :cNo")

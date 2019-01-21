@@ -11,6 +11,5 @@ import lombok.Setter;
 public class PostsUpdateDto {
 	String pTitle;
 	String pContent;
-	String pHashtag;
 	String pThumbnail;
 }

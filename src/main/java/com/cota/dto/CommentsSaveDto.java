@@ -13,7 +13,7 @@ public class CommentsSaveDto{
 
     private String cContent;
     private Long cPno;
-    private String cUno;
+    private Long cUno;
 
     // change java entity to data entity for using repository method
 	public Comments toEntity(){

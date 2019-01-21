@@ -9,13 +9,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="retrieveAllAsCommentsListDto" resultType = "com.cota.dto.CommentsListDto">
         SELECT 
-            c_no,
-            c_content,
-            c_pno,
-            c_uno,
-            modified_date
-        FROM comments
-        WHERE c_pno = #{pNo}
+            c.c_no,
+            c.c_content,
+            c.c_uno,
+            modified_date,
+            u.u_no,
+            u.u_name,
+            u.u_email
+        FROM users AS u JOIN comments AS c 
+        ON c.c_uno = u.u_no
+        WHERE c.c_pno = #{pNo}
+        ORDER BY created_date DESC, modified_date DESC
         LIMIT #{rowNum, jdbcType=NUMERIC} , 10
     </select>
 

@@ -6,42 +6,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  
  <!-- use mybatis to 'READ' database -->
 <mapper namespace="com.cota.mapper.PostsMapper">
- 
- 	<!-- test query for mybatis connection -->
-    <select id="postsCount" resultType="int">
-        SELECT
-            COUNT(*)
-        FROM posts
-    </select>
     
     <!-- read data for card_list -->
     <select id="retrieveAllAsPostsListDto" resultType="com.cota.dto.PostsListDto">
     	SELECT 
-    		p_no,
-    		p_title,
-    		p_uno, 
+    		p.p_no,
+    		p.p_title,
+    		u.u_name,
+			u.u_email,
     		modified_date, 
-    		p_thumbnail, 
-    		p_like_cnt, 
-    		p_comment_cnt, 
-    		p_view_cnt
-    	FROM posts
-    	<choose> 
-    		<when test="category == 'recent'"> 
-    			ORDER BY modified_date DESC, p_like_cnt DESC
-    		</when> 
-    		<when test="category == 'best'">
-    			ORDER BY p_like_cnt DESC, modified_date DESC
-    		</when>
-    		<when test="category == 'save'">
-				WHERE p_no IN (SELECT r_pno FROM repositorys WHERE r_uno=#{uNo})
-				ORDER BY modified_date DESC, p_like_cnt DESC
-    		</when>
-    		<when test="category == 'follow'">
-    			WHERE p_uno IN (SELECT f_follewed_no FROM follows WHERE f_follower_no = #{uNo})
-    			ORDER BY modified_date DESC, p_like_cnt DESC
-    		</when>
-    	</choose>
+    		p.p_thumbnail
+    	FROM posts as p join users as u on u_no = p_uno
+    	ORDER BY created_date DESC, modified_date DESC
 		LIMIT #{rowNum, jdbcType=NUMERIC} , 10
     </select>
     

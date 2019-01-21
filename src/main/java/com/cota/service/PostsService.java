@@ -34,19 +34,14 @@ public class PostsService {
     }
     
     @Transactional
-    public void updateViewCount(Long pNo){
-        postsRepository.updateViewCount(pNo);
-    }
-    
-    @Transactional
     public Optional<Posts> findById(Long pNo) {
     	return postsRepository.findById(pNo);
     }
     
     @Transactional
     public void updatePosts(Long pNo, String pTitle, String pContent,
-    		String pHashtag, String pThumbnail) {
-    	postsRepository.updatePosts(pNo, pTitle, pContent, pHashtag, pThumbnail);
+    		String pThumbnail) {
+    	postsRepository.updatePosts(pNo, pTitle, pContent, pThumbnail);
     }
     
     @Transactional
@@ -60,9 +55,5 @@ public class PostsService {
     public List<PostsListDto> findAll(Map<String, Object> param) {
     	return postsMapper.retrieveAllAsPostsListDto(param);
     }
-    
-    @Transactional
-    public int getCount() {
-    	return postsMapper.postsCount();
-    }
+
 }

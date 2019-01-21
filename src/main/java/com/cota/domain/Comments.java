@@ -26,8 +26,8 @@ public class Comments extends BaseTimeEntity{
 			c_content varchar(255) not null,
 			c_pno bigint not null,
 			c_uno varchar(255) not null,
-			c_created_date datetime,
-			c_modified_date datetime,
+			created_date datetime,
+			modified_date datetime,
 			primary key(c_no),
 			foreign key(c_pno)
 			references posts(p_no) on delete cascade on update cascade
@@ -36,7 +36,8 @@ public class Comments extends BaseTimeEntity{
 	
 	@Id	// PK
 	// configure auto-increment option to PK in mysql
-	@GeneratedValue(strategy = GenerationType.IDENTITY)@Column(name = "c_no")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "c_no")
 	private Long cNo;
 	
 	@Column(nullable = false)
@@ -46,10 +47,10 @@ public class Comments extends BaseTimeEntity{
 	private Long cPno;
 	
 	@Column(nullable = false)
-	private String cUno;
+	private Long cUno;
 	
 	@Builder
-	public Comments (String cContent, Long cPno, String cUno) {
+	public Comments (String cContent, Long cPno, Long cUno) {
 		this.cContent = cContent;
 		this.cPno = cPno;
 		this.cUno = cUno;

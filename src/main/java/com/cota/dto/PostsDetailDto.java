@@ -23,15 +23,7 @@ public class PostsDetailDto {
 	
 	private String pContent;
 	
-	private String pHashtag;
-	
 	private Date modifiedDate;
 	
 	private String pThumbnail;
-	
-	private int pLikeCnt;
-	
-	private int pCommentCnt;
-	
-	private int pViewCnt;
 }

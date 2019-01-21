@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.cota.domain.Comments;
 import com.cota.dto.CommentsListDto;
@@ -45,6 +44,7 @@ public class CommentsController{
 	public ResponseEntity<?> getCommentList (@PathVariable("pNo") Long pNo, 
 		@PathVariable("rowNum") int rowNum, HttpServletRequest request){
 		
+		logger.info("Retrieving comments!");
 		//HttpSession session = request.getSession();
 
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -66,7 +66,7 @@ public class CommentsController{
 	@CrossOrigin
 	@DeleteMapping(value = "/comments/{cNo}")
     public ResponseEntity<?> deleteComments(@PathVariable("cNo") long cNo) {
-        logger.info("Fetching & Deleting Comments with cNo {}", cNo);
+        logger.info("Deleting Comments with cNo {}", cNo);
        
         commnetsService.deleteCommentsById(cNo);
         return new ResponseEntity<Comments>(HttpStatus.NO_CONTENT);
@@ -84,6 +84,9 @@ public class CommentsController{
 	@PutMapping(value = "/comments/{cNo}")
 	public ResponseEntity<?> updateComments(@PathVariable("cNo") long cNo, 
 		@RequestBody CommentsSaveDto dto){
+		
+		logger.info("Updating comments with cNo {}", cNo);
+		
 		String cContent = dto.getCContent();
 
 		commnetsService.updateComments(cNo, cContent);
@@ -101,10 +104,7 @@ public class CommentsController{
 	@CrossOrigin
 	@PostMapping(value ="/commentsSave")
 	public ResponseEntity<?> saveComments(@RequestBody CommentsSaveDto dto){
-		logger.info("CommentsSaveDto : " + dto);
-		logger.info("content is : " + dto.getCContent());
-		logger.info("cPno is : " + dto.getCPno());
-		logger.info("cUno is : " + dto.getCUno());
+		logger.info("Saving Posts with CommentsSaveDto : ", dto);
 		
 		commnetsService.saveComments(dto);
 		

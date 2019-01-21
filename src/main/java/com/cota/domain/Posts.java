@@ -52,24 +52,14 @@ public class Posts extends BaseTimeEntity{
 	private String pContent;
 	
 	@Column(nullable = false)
-	private String pHashtag;
-	
-	@Column(nullable = false)
 	private String pThumbnail;
-	
-	private int pLikeCnt;
-	
-	private int pCommentCnt;
-	
-	private int pViewCnt;
 	
 	// 생성자 상단에 선언시 생성자에 포함된 필드만 빌더에 포함
 	@Builder
-	public Posts(String pTitle, String pContent, Long pUno, String pHashtag, String pThumbnail) {
+	public Posts(String pTitle, String pContent, Long pUno, String pThumbnail) {
 		this.pTitle = pTitle;
 		this.pContent = pContent;
 		this.pUno = pUno;
-		this.pHashtag = pHashtag;
 		this.pThumbnail = pThumbnail;
 	}
 	

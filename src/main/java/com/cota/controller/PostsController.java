@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -29,7 +26,6 @@ import com.cota.dto.PostsListDto;
 import com.cota.dto.PostsSaveDto;
 import com.cota.dto.PostsUpdateDto;
 import com.cota.service.PostsService;
-import com.cota.util.StringUtil;
 
 import lombok.AllArgsConstructor;
 
@@ -53,11 +49,9 @@ public class PostsController {
 	public ResponseEntity<?> savePosts(@RequestBody PostsSaveDto dto,
 	 UriComponentsBuilder ucBuilder) {
 		
-		logger.info("PostsSaveDto : " + dto);
+		logger.info("Saving Posts with PostsSaveDto : " + dto);
 		
 		Long pNo = postsService.save(dto);
-		
-		logger.info("PostsCount is "+postsService.getCount());
 		
 		HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/posts/{pNo}").buildAndExpand(pNo).toUri());
@@ -81,10 +75,9 @@ public class PostsController {
  
         String pTitle = dto.getPTitle();
         String pContent = dto.getPContent();
-        String pHashtag = dto.getPHashtag();
         String pThumbnail = dto.getPThumbnail();
         
-        postsService.updatePosts(pNo, pTitle, pContent, pHashtag, pThumbnail);
+        postsService.updatePosts(pNo, pTitle, pContent, pThumbnail);
         
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/posts/{pNo}").buildAndExpand(pNo).toUri());
@@ -101,7 +94,7 @@ public class PostsController {
 	 */
 	@DeleteMapping(value = "/posts/{pNo}")
     public ResponseEntity<?> deleteUser(@PathVariable("pNo") long pNo) {
-        logger.info("Fetching & Deleting Posts with pNo {}", pNo);
+        logger.info("Deleting Posts with pNo {}", pNo);
        
         postsService.deletePostsById(pNo);
         return new ResponseEntity<Posts>(HttpStatus.NO_CONTENT);
@@ -116,20 +109,14 @@ public class PostsController {
 	 */
 	@CrossOrigin
 	@GetMapping(value = "/posts/{pNo}")
-    public ResponseEntity<?> getPost(@PathVariable("pNo") long pNo, Model model,
-    		HttpServletRequest request) {
+    public ResponseEntity<?> getPost(@PathVariable("pNo") long pNo, Model model) {
         
 		logger.info("Fetching Posts with pNo {}", pNo);
 		
-		HttpSession session = request.getSession();
 		Map<String, String> param = new HashMap<String, String>();
 		
 		param.put("pNo", Long.toString(pNo));
-		param.put("uNo", StringUtil.nvl(session.getAttribute("uNo"), ""));
 		
-		// view count +1
-		postsService.updateViewCount(pNo);
-        
 		// retrieve post detail
 		Optional<Posts> posts = postsService.findById(pNo);
 		
@@ -145,16 +132,13 @@ public class PostsController {
 	 * @return
 	 */
 	@CrossOrigin
-	@PostMapping(value = "list/{category}/{rowNum}")
-    public ResponseEntity<?> getPostList(@PathVariable("category") String category, 
-    		@PathVariable("rowNum") int rowNum, HttpServletRequest request) {
-        
-		HttpSession session = request.getSession();
-		Map<String, Object> param = new HashMap<String, Object>();
+	@PostMapping(value = "list/{rowNum}")
+	public ResponseEntity<?> getPostList(@PathVariable("rowNum") int rowNum) {
 		
-		param.put("category", StringUtil.nvl(category, "recent"));
+		logger.info("Retrieving All Posts!");
+
+		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("rowNum", rowNum);
-		param.put("uNo", StringUtil.nvl(session.getAttribute("uNo"), ""));
 
 		List<PostsListDto> list = postsService.findAll(param);
         

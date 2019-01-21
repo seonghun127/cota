@@ -15,7 +15,6 @@ public class PostsSaveDto{
 	private String pTitle;
 	private String pContent;
 	private Long pUno;
-	private String pHashtag;
 	private String pThumbnail;
 	
 	// change java entity to data entity for using repository method
@@ -24,17 +23,15 @@ public class PostsSaveDto{
                 .pTitle(pTitle)
                 .pContent(pContent)
                 .pUno(pUno)
-                .pHashtag(pHashtag)
                 .pThumbnail(pThumbnail)
                 .build();
     }
 	
 	@Builder
-	public PostsSaveDto(String pTitle, String pContent, Long pUno, String pHashtag, String pThumbnail) {
+	public PostsSaveDto(String pTitle, String pContent, Long pUno, String pThumbnail) {
 		this.pTitle = pTitle;
 		this.pContent = pContent;
 		this.pUno = pUno;
-		this.pHashtag = pHashtag;
 		this.pThumbnail = pThumbnail;
 	}
 }
