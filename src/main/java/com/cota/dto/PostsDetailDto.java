@@ -26,4 +26,5 @@ public class PostsDetailDto {
 	private Date modifiedDate;
 	
 	private String pThumbnail;
+
 }

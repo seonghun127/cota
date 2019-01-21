@@ -56,4 +56,8 @@ public class PostsService {
     	return postsMapper.retrieveAllAsPostsListDto(param);
     }
 
+    @Transactional
+    public PostsListDto findOne(Long pNo) {
+    	return postsMapper.retrieveOneAsPostsListDto(pNo);
+    }
 }

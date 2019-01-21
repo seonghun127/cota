@@ -46,14 +46,17 @@ public class PostsController {
 	 */
 	@CrossOrigin
 	@PostMapping("/save")
-	public ResponseEntity<?> savePosts(@RequestBody PostsSaveDto dto,
-	 UriComponentsBuilder ucBuilder) {
+	public ResponseEntity<?> savePosts(@RequestBody PostsSaveDto dto, Model model) {
 		
 		logger.info("Saving Posts with PostsSaveDto : " + dto);
 		
-		postsService.save(dto);
+		Long pNo = postsService.save(dto);
+
+		PostsListDto post = postsService.findOne(pNo);
+
+		model.addAttribute("post", post);
 		
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>(post, HttpStatus.CREATED);
 	}
 	
 	// ------------------------------------------------------------------------------ //
@@ -67,7 +70,7 @@ public class PostsController {
 	 */
 	@PutMapping("/posts/{pNo}")
 	public ResponseEntity<?> updateUser(@PathVariable("pNo") long pNo, 
-		@RequestBody PostsUpdateDto dto, UriComponentsBuilder ucBuilder) {
+		@RequestBody PostsUpdateDto dto) {
         logger.info("Updating Posts with pNo {}", pNo);
  
         String pTitle = dto.getPTitle();

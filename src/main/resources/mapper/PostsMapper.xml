@@ -21,5 +21,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	ORDER BY created_date DESC, modified_date DESC
 		LIMIT #{rowNum, jdbcType=NUMERIC} , 10
     </select>
+
+	<select id="retrieveOneAsPostsListDto" resultType="com.cota.dto.PostsListDto">
+    	SELECT 
+    		p.p_no,
+    		p.p_title,
+    		u.u_name,
+			p.p_content,
+			u.u_email,
+    		modified_date, 
+    		p.p_thumbnail
+    	FROM posts as p join users as u on u_no = p_uno
+    	WHERE p.p_no = #{pNo}
+    </select>
     
 </mapper>
