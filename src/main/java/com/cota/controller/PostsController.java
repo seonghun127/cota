@@ -132,7 +132,7 @@ public class PostsController {
 	 * @return
 	 */
 	@CrossOrigin
-	@PostMapping(value = "list/{rowNum}")
+	@GetMapping(value = "list/{rowNum}")
 	public ResponseEntity<?> getPostList(@PathVariable("rowNum") int rowNum) {
 		
 		logger.info("Retrieving All Posts!");
