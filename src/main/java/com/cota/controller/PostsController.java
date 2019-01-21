@@ -51,12 +51,9 @@ public class PostsController {
 		
 		logger.info("Saving Posts with PostsSaveDto : " + dto);
 		
-		Long pNo = postsService.save(dto);
+		postsService.save(dto);
 		
-		HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/posts/{pNo}").buildAndExpand(pNo).toUri());
-		
-		return new ResponseEntity<String>(headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 	
 	// ------------------------------------------------------------------------------ //
@@ -78,11 +75,8 @@ public class PostsController {
         String pThumbnail = dto.getPThumbnail();
         
         postsService.updatePosts(pNo, pTitle, pContent, pThumbnail);
-        
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/posts/{pNo}").buildAndExpand(pNo).toUri());
        
-        return new ResponseEntity<String>(headers, HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 	
 	// ------------------------------------------------------------------------------ //
