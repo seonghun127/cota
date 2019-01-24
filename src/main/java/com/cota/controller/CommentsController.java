@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.cota.domain.Comments;
 import com.cota.dto.CommentsListDto;
 import com.cota.dto.CommentsSaveDto;
+import com.cota.dto.CommentsUpdateDto;
 import com.cota.service.CommentsService;
 
 import org.slf4j.Logger;
@@ -40,7 +41,7 @@ public class CommentsController{
 	 * get comments list
 	 */
 	@CrossOrigin
-	@GetMapping("comments/{pNo}/{rowNum}")
+	@GetMapping("/comments/{pNo}/{rowNum}")
 	public ResponseEntity<?> getCommentList (@PathVariable("pNo") Long pNo, 
 		@PathVariable("rowNum") int rowNum, HttpServletRequest request){
 		
@@ -83,13 +84,13 @@ public class CommentsController{
 	@CrossOrigin
 	@PutMapping("/comments/{cNo}")
 	public ResponseEntity<?> updateComments(@PathVariable("cNo") long cNo, 
-		@RequestBody CommentsSaveDto dto){
+		@RequestBody CommentsUpdateDto dto){
 		
 		logger.info("Updating comments with cNo {}", cNo);
 		
-		String cContent = dto.getCContent();
+		dto.setCNo(cNo);
 
-		commnetsService.updateComments(cNo, cContent);
+		commnetsService.updateComments(dto);
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

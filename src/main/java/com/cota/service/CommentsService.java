@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import com.cota.dto.CommentsListDto;
 import com.cota.dto.CommentsSaveDto;
+import com.cota.dto.CommentsUpdateDto;
 import com.cota.mapper.CommentsMapper;
 import com.cota.repository.CommentsRepository;
 
@@ -37,8 +38,8 @@ public class CommentsService{
     }
 
     @Transactional
-    public void updateComments(Long cNo, String cContent){
-        commentsRepository.updateComments(cNo, cContent);
+    public void updateComments(CommentsUpdateDto dto){
+        commentsRepository.save(dto.toEntity());
     }
 
     // ----------------------------------Mybatis----------------------------------- //

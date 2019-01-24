@@ -56,7 +56,8 @@ public class Posts extends BaseTimeEntity{
 	
 	// 생성자 상단에 선언시 생성자에 포함된 필드만 빌더에 포함
 	@Builder
-	public Posts(String pTitle, String pContent, Long pUno, String pThumbnail) {
+	public Posts(Long pNo, String pTitle, String pContent, Long pUno, String pThumbnail) {
+		this.pNo = pNo;
 		this.pTitle = pTitle;
 		this.pContent = pContent;
 		this.pUno = pUno;

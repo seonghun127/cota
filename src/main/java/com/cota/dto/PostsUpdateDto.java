@@ -1,6 +1,8 @@
 package com.cota.dto;
 
 
+import com.cota.domain.Posts;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +11,21 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PostsUpdateDto {
-	String pTitle;
-	String pContent;
-	String pThumbnail;
+
+	private Long pNo;
+	private String pTitle;
+	private String pContent;
+	private Long pUNo;
+	private String pThumbnail;
+	
+	// change java entity to data entity for using repository method
+	public Posts toEntity(){
+		return Posts.builder()
+				.pNo(pNo)
+                .pTitle(pTitle)
+                .pContent(pContent)
+                .pUno(pUNo)
+                .pThumbnail(pThumbnail)
+                .build();
+    }
 }

@@ -10,10 +10,6 @@ import com.cota.dto.PostsListDto;
 @Repository
 public interface PostsMapper {
 	
-	// read data for card_list
+	// retrieve all or one post(s)
 	List<PostsListDto> retrieveAsPostsListDto(Map<String, Object> param);
-
-	// read data for one card detail
-	PostsListDto retrieveOneAsPostsListDto(Long pNo);
-
 }

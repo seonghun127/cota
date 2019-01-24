@@ -75,17 +75,23 @@ public class PostsController {
 	 */
 	@CrossOrigin
 	@PutMapping("/posts/{pNo}")
-	public ResponseEntity<?> updatePosts(@PathVariable("pNo") long pNo, 
-		@RequestBody PostsUpdateDto dto) {
-        logger.info("Updating Posts with pNo {}", pNo);
- 
-        String pTitle = dto.getPTitle();
-        String pContent = dto.getPContent();
-        String pThumbnail = dto.getPThumbnail();
-        
-        postsService.updatePosts(pNo, pTitle, pContent, pThumbnail);
-       
-        return new ResponseEntity<>(HttpStatus.OK);
+	public ResponseEntity<?> updatePosts(@PathVariable("pNo") Long pNo, 
+		@RequestBody PostsUpdateDto dto, Model model) {
+		logger.info("Updating Posts with pNo {}", pNo);
+		
+        dto.setPNo(pNo);
+		Long _pNo = postsService.updatePost(dto);
+
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("check", "one_post_details");
+		param.put("pNo", _pNo);
+
+        // after saving, retrieve that post
+		List<PostsListDto> post = postsService.findPost(param);
+
+		model.addAttribute("post", post);
+		
+		return new ResponseEntity<>(post, HttpStatus.CREATED);
     }
 	
 	// ------------------------------------------------------------------------------ //

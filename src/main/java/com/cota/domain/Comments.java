@@ -50,7 +50,8 @@ public class Comments extends BaseTimeEntity{
 	private Long cUno;
 	
 	@Builder
-	public Comments (String cContent, Long cPno, Long cUno) {
+	public Comments (Long cNo, String cContent, Long cPno, Long cUno) {
+		this.cNo = cNo;
 		this.cContent = cContent;
 		this.cPno = cPno;
 		this.cUno = cUno;

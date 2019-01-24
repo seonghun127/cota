@@ -2,15 +2,12 @@ package com.cota.service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
-import com.cota.domain.Posts;
-import com.cota.dto.PostsDetailDto;
 import com.cota.dto.PostsListDto;
 import com.cota.dto.PostsSaveDto;
+import com.cota.dto.PostsUpdateDto;
 import com.cota.mapper.PostsMapper;
 import com.cota.repository.PostsRepository;
 
@@ -33,10 +30,10 @@ public class PostsService {
         return postsRepository.save(dto.toEntity()).getPNo();
     }
     
+
     @Transactional
-    public void updatePosts(Long pNo, String pTitle, String pContent,
-    		String pThumbnail) {
-    	postsRepository.updatePosts(pNo, pTitle, pContent, pThumbnail);
+    public Long updatePost(PostsUpdateDto dto) {
+        return postsRepository.save(dto.toEntity()).getPNo();
     }
     
     @Transactional
@@ -46,13 +43,9 @@ public class PostsService {
     
     // ----------------------------------Mybatis----------------------------------- //
     
+    // retrieve all or one post(s)
     @Transactional
     public List<PostsListDto> findPost(Map<String, Object> param) {
     	return postsMapper.retrieveAsPostsListDto(param);
     }
-
-    // @Transactional
-    // public PostsListDto findById(Map<String, Object> param) {
-    // 	return postsMapper.retrieveAsPostsListDto(param);
-    // }
 }

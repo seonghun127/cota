@@ -18,9 +18,11 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
 			+ "p.pThumbnail = :pThumbnail WHERE p.pNo = :pNo")
 	void updatePosts(@Param("pNo") Long pNo, @Param("pTitle") String pTitle,
 			@Param("pContent") String pContent, @Param("pThumbnail") String pThumbnail);
+
+	@Modifying
+	@Query("UPDATE Posts p SET p.pTitle = :pTitle,"
+			+ "p.pContent = :pContent,"
+			+ "p.pThumbnail = :pThumbnail WHERE p.pNo = :pNo")
+	void updatePost(Long pNo, Posts posts);
 	
-	
-	// retrieve one post's details
-	@Query("SELECT p.pContent FROM Posts p WHERE p.pNo = :pNo")
-	Optional<Posts> findById(@Param("pNo")Long pNo);
 }
