@@ -22,13 +22,4 @@ public class PostsListDto{
 	private Date modifiedDate;
 	private String pThumbnail;
 	
-	/*public PostsListDto (String pTitle, Long pUno, Date modifiedDate, String pThumbnail, int pLikeCnt, int pCommentCnt, int pViewCnt) {
-		this.pTitle = pTitle;
-		this.pUno = pUno;
-		this.modifiedDate = modifiedDate;
-		this.pThumbnail = pThumbnail;
-		this.pLikeCnt = pLikeCnt;
-		this.pCommentCnt = pCommentCnt;
-		this.pViewCnt = pViewCnt;
-	}*/
 }
