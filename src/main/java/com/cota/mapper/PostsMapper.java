@@ -11,7 +11,7 @@ import com.cota.dto.PostsListDto;
 public interface PostsMapper {
 	
 	// read data for card_list
-	List<PostsListDto> retrieveAllAsPostsListDto(Map<String, Object> param);
+	List<PostsListDto> retrieveAsPostsListDto(Map<String, Object> param);
 
 	// read data for one card detail
 	PostsListDto retrieveOneAsPostsListDto(Long pNo);

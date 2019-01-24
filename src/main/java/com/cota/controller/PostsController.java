@@ -45,14 +45,19 @@ public class PostsController {
 	 * @return
 	 */
 	@CrossOrigin
-	@PostMapping("/save")
+	@PostMapping("/posts")
 	public ResponseEntity<?> savePosts(@RequestBody PostsSaveDto dto, Model model) {
 		
 		logger.info("Saving Posts with PostsSaveDto : " + dto);
 		
 		Long pNo = postsService.save(dto);
 
-		PostsListDto post = postsService.findOne(pNo);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("check", "one_post_details");
+		param.put("pNo", pNo);
+
+		// after saving, retrieve that post
+		List<PostsListDto> post = postsService.findPost(param);
 
 		model.addAttribute("post", post);
 		
@@ -68,8 +73,9 @@ public class PostsController {
 	 * @param ucBuilder
 	 * @return
 	 */
+	@CrossOrigin
 	@PutMapping("/posts/{pNo}")
-	public ResponseEntity<?> updateUser(@PathVariable("pNo") long pNo, 
+	public ResponseEntity<?> updatePosts(@PathVariable("pNo") long pNo, 
 		@RequestBody PostsUpdateDto dto) {
         logger.info("Updating Posts with pNo {}", pNo);
  
@@ -89,37 +95,14 @@ public class PostsController {
 	 * @param pNo
 	 * @return
 	 */
-	@DeleteMapping(value = "/posts/{pNo}")
-    public ResponseEntity<?> deleteUser(@PathVariable("pNo") long pNo) {
+	@CrossOrigin
+	@DeleteMapping("/posts/{pNo}")
+    public ResponseEntity<?> deletePosts(@PathVariable("pNo") long pNo) {
         logger.info("Deleting Posts with pNo {}", pNo);
        
-        postsService.deletePostsById(pNo);
+		postsService.deletePostsById(pNo);
+		
         return new ResponseEntity<Posts>(HttpStatus.NO_CONTENT);
-    }
-	
-	// ------------------------------------------------------------------------------ //
-	
-	/**
-	 * get one post (detail)
-	 * @param pNo
-	 * @return
-	 */
-	@CrossOrigin
-	@GetMapping(value = "/posts/{pNo}")
-    public ResponseEntity<?> getPost(@PathVariable("pNo") long pNo, Model model) {
-        
-		logger.info("Fetching Posts with pNo {}", pNo);
-		
-		Map<String, String> param = new HashMap<String, String>();
-		
-		param.put("pNo", Long.toString(pNo));
-		
-		// retrieve post detail
-		Optional<Posts> posts = postsService.findById(pNo);
-		
-		model.addAttribute("posts", posts);
-		
-        return new ResponseEntity<>(model, HttpStatus.OK);
     }
 
 	// ------------------------------------------------------------------------------ //
@@ -129,15 +112,16 @@ public class PostsController {
 	 * @return
 	 */
 	@CrossOrigin
-	@GetMapping(value = "list/{rowNum}")
+	@GetMapping("/posts/{rowNum}")
 	public ResponseEntity<?> getPostList(@PathVariable("rowNum") int rowNum) {
 		
 		logger.info("Retrieving All Posts!");
 
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("rowNum", rowNum);
+		param.put("check", "all_post_details");
 
-		List<PostsListDto> list = postsService.findAll(param);
+		List<PostsListDto> list = postsService.findPost(param);
         
         return new ResponseEntity<List<PostsListDto>>(list, HttpStatus.OK);
     }

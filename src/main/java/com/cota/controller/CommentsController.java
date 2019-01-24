@@ -40,7 +40,7 @@ public class CommentsController{
 	 * get comments list
 	 */
 	@CrossOrigin
-	@GetMapping(value = "comments/{pNo}/{rowNum}")
+	@GetMapping("comments/{pNo}/{rowNum}")
 	public ResponseEntity<?> getCommentList (@PathVariable("pNo") Long pNo, 
 		@PathVariable("rowNum") int rowNum, HttpServletRequest request){
 		
@@ -64,7 +64,7 @@ public class CommentsController{
 	 * @return
 	 */
 	@CrossOrigin
-	@DeleteMapping(value = "/comments/{cNo}")
+	@DeleteMapping("/comments/{cNo}")
     public ResponseEntity<?> deleteComments(@PathVariable("cNo") long cNo) {
         logger.info("Deleting Comments with cNo {}", cNo);
        
@@ -81,7 +81,7 @@ public class CommentsController{
 	 * @return
 	 */
 	@CrossOrigin
-	@PutMapping(value = "/comments/{cNo}")
+	@PutMapping("/comments/{cNo}")
 	public ResponseEntity<?> updateComments(@PathVariable("cNo") long cNo, 
 		@RequestBody CommentsSaveDto dto){
 		
@@ -102,7 +102,7 @@ public class CommentsController{
 	 * @return 
 	 */
 	@CrossOrigin
-	@PostMapping(value ="/commentsSave")
+	@PostMapping("/comments")
 	public ResponseEntity<?> saveComments(@RequestBody CommentsSaveDto dto){
 		logger.info("Saving Posts with CommentsSaveDto : ", dto);
 		

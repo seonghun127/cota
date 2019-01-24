@@ -34,11 +34,6 @@ public class PostsService {
     }
     
     @Transactional
-    public Optional<Posts> findById(Long pNo) {
-    	return postsRepository.findById(pNo);
-    }
-    
-    @Transactional
     public void updatePosts(Long pNo, String pTitle, String pContent,
     		String pThumbnail) {
     	postsRepository.updatePosts(pNo, pTitle, pContent, pThumbnail);
@@ -52,12 +47,12 @@ public class PostsService {
     // ----------------------------------Mybatis----------------------------------- //
     
     @Transactional
-    public List<PostsListDto> findAll(Map<String, Object> param) {
-    	return postsMapper.retrieveAllAsPostsListDto(param);
+    public List<PostsListDto> findPost(Map<String, Object> param) {
+    	return postsMapper.retrieveAsPostsListDto(param);
     }
 
-    @Transactional
-    public PostsListDto findOne(Long pNo) {
-    	return postsMapper.retrieveOneAsPostsListDto(pNo);
-    }
+    // @Transactional
+    // public PostsListDto findById(Map<String, Object> param) {
+    // 	return postsMapper.retrieveAsPostsListDto(param);
+    // }
 }
