@@ -19,8 +19,9 @@ back-end : java, mariaDB, gradle, h2, jpa, mybatis
 ## CI & Deploy
 
 * [travis-CI](https://travis-ci.org/) - Free CI services offered at github
-* [S3 & CodeDeploy in AWS](https://aws.amazon.com) - **S3** : The repository where the file is stored
+* [S3 & CodeDeploy in AWS](https://aws.amazon.com) - **S3** : The repository where the file is stored  
                                                      **CodeDeploy** : IAM ROLE that deploys files automatically
+                                                     
 ```
 deploy:
   - provider: s3
@@ -65,7 +66,3 @@ deploy:
 * 요구사항분석, 데이터베이스 구축, 화면 설계
 * 게시글, 댓글 CRUD 구현
 * 네아로 (네이버 아이디로 로그인)
-
-## Implements
-
-* 현재 개발 진행 중입니다.
