@@ -7,7 +7,7 @@ _이곳은 back-end 개발만 진행중이며 front-end 개발은 다른 팀원�
 ### Used techniques
 
 ```
-back-end : java, mariaDB, gradle, h2, jpa, mybatis
+back-end : java, mariaDB, springboot, gradle, h2, jpa, mybatis
 ```
 
 ## Built With
