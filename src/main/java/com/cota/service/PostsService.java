@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
+
+import com.cota.domain.Posts;
 import com.cota.dto.posts.*;
 import com.cota.mapper.PostsMapper;
 import com.cota.repository.PostsRepository;
@@ -24,10 +26,6 @@ public class PostsService {
 
     // ------------------------------------JPA-------------------------------------- //
 
-    @Transactional
-    public PostsUpdateDto findByPno(Long pNo){
-        return postsRepository.findByPno(pNo);
-    }
 
     @Transactional
     public Long save(PostsSaveDto dto){

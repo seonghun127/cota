@@ -74,12 +74,8 @@ public class PostsController {
 		@RequestBody PostsUpdateDto dto, Model model) {
 		logger.info("Updating Posts with pNo {}", pNo);
 		
-		PostsUpdateDto posts = postsService.findByPno(pNo);
-		posts.setPTitle(dto.getPTitle());
-		posts.setPContent(dto.getPContent());
-		posts.setPThumbnail(dto.getPThumbnail());
-
-		Long _pNo = postsService.updatePost(posts);
+		dto.setPNo(pNo);
+		Long _pNo = postsService.updatePost(dto);
 
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("check", "one_post_details");
