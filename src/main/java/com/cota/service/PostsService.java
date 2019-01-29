@@ -5,9 +5,7 @@ import java.util.Map;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
-import com.cota.dto.PostsListDto;
-import com.cota.dto.PostsSaveDto;
-import com.cota.dto.PostsUpdateDto;
+import com.cota.dto.posts.*;
 import com.cota.mapper.PostsMapper;
 import com.cota.repository.PostsRepository;
 

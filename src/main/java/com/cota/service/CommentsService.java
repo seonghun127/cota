@@ -5,9 +5,7 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
-import com.cota.dto.CommentsListDto;
-import com.cota.dto.CommentsSaveDto;
-import com.cota.dto.CommentsUpdateDto;
+import com.cota.dto.comments.*;
 import com.cota.mapper.CommentsMapper;
 import com.cota.repository.CommentsRepository;
 

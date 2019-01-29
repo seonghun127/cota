@@ -3,11 +3,9 @@ package com.cota.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -19,12 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.cota.domain.Posts;
-import com.cota.dto.PostsListDto;
-import com.cota.dto.PostsSaveDto;
-import com.cota.dto.PostsUpdateDto;
+import com.cota.dto.posts.*;
 import com.cota.service.PostsService;
 
 import lombok.AllArgsConstructor;

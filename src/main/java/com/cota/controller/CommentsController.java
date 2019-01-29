@@ -7,9 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.cota.domain.Comments;
-import com.cota.dto.CommentsListDto;
-import com.cota.dto.CommentsSaveDto;
-import com.cota.dto.CommentsUpdateDto;
+import com.cota.dto.comments.*;
 import com.cota.service.CommentsService;
 
 import org.slf4j.Logger;

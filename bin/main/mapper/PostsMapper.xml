@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.cota.mapper.PostsMapper">
     
     <!-- retrieve data of post(s) -->
-    <select id="retrieveAsPostsListDto" resultType="com.cota.dto.PostsListDto">
+    <select id="retrieveAsPostsListDto" resultType="com.cota.dto.posts.PostsListDto">
     	SELECT 
     		p.p_no,
     		p.p_title,

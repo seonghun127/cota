@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <!-- use mybatis to 'READ' database -->
 <mapper namespace="com.cota.mapper.CommentsMapper">
 
-    <select id="retrieveAllAsCommentsListDto" resultType = "com.cota.dto.CommentsListDto">
+    <select id="retrieveAllAsCommentsListDto" resultType = "com.cota.dto.comments.CommentsListDto">
         SELECT 
             c.c_no,
             c.c_content,

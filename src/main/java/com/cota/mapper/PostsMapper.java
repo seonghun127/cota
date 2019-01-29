@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
-import com.cota.dto.PostsListDto;
+import com.cota.dto.posts.*;
 
 @Repository
 public interface PostsMapper {
