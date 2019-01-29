@@ -74,6 +74,7 @@ public class PostsController {
 		@RequestBody PostsUpdateDto dto, Model model) {
 		logger.info("Updating Posts with pNo {}", pNo);
 		
+		// set pNo to match the post to be updated
 		dto.setPNo(pNo);
 		Long _pNo = postsService.updatePost(dto);
 

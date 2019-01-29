@@ -16,7 +16,7 @@ public class PostsUpdateDto {
 	private Long pNo;
 	private String pTitle;
 	private String pContent;
-	private Long pUNo;
+	private Long pUno;
 	private String pThumbnail;
 	
 	// change java entity to data entity for using repository method
@@ -25,7 +25,7 @@ public class PostsUpdateDto {
 				.pNo(pNo)
                 .pTitle(pTitle)
                 .pContent(pContent)
-                .pUno(pUNo)
+                .pUno(pUno)
                 .pThumbnail(pThumbnail)
                 .build();
     }
