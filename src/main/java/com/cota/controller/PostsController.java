@@ -3,6 +3,7 @@ package com.cota.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -74,8 +75,12 @@ public class PostsController {
 		@RequestBody PostsUpdateDto dto, Model model) {
 		logger.info("Updating Posts with pNo {}", pNo);
 		
-        dto.setPNo(pNo);
-		Long _pNo = postsService.updatePost(dto);
+		PostsUpdateDto posts = postsService.findByPno(pNo);
+		posts.setPTitle(dto.getPTitle());
+		posts.setPContent(dto.getPContent());
+		posts.setPThumbnail(dto.getPThumbnail());
+
+		Long _pNo = postsService.updatePost(posts);
 
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("check", "one_post_details");
