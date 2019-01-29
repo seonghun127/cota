@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.cota.domain.Comments;
 import com.cota.dto.comments.*;
-import com.cota.service.CommentsService;
+import com.cota.service.comments.CommentsService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

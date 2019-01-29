@@ -18,7 +18,7 @@ import com.cota.dto.posts.*;
 import com.cota.dto.users.UsersSaveDto;
 import com.cota.repository.PostsRepository;
 import com.cota.repository.UsersRepository;
-import com.cota.service.PostsService;
+import com.cota.service.posts.PostsService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -67,8 +67,12 @@ public class PostsRepositoryTest {
         param.put("check", "all_post_details");
         param.put("rowNum", 0);
 
+        PostsListDto dto = new PostsListDto();
+
+        dto.setParam(param);
+
         //when
-        List<PostsListDto> postsList = postsService.findPost(param);
+        List<PostsListDto> postsList = postsService.findPost(dto);
 
         //then
         PostsListDto posts = postsList.get(0);

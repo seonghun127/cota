@@ -1,7 +1,6 @@
-package com.cota.service;
+package com.cota.service.posts;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -16,7 +15,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service
-public class PostsService {
+public class PostsServiceImpl implements PostsService{
 	
 	// jpa
     private PostsRepository postsRepository;
@@ -26,28 +25,35 @@ public class PostsService {
 
     // ------------------------------------JPA-------------------------------------- //
 
+    @Transactional
+    public Posts findByPNo(PostsDto dto){
+        return postsRepository.findByPNo(dto.getPNo());
+    }
 
     @Transactional
-    public Long save(PostsSaveDto dto){
+    public Long save(PostsDto dto){
+
         return postsRepository.save(dto.toEntity()).getPNo();
+
     }
     
 
     @Transactional
-    public Long updatePost(PostsUpdateDto dto) {
+    public Long updatePost(PostsDto dto){
+
         return postsRepository.save(dto.toEntity()).getPNo();
     }
     
     @Transactional
-    public void deletePostsById(Long pNo) {
-    	postsRepository.deleteById(pNo);
+    public void deletePostsById(PostsDto dto) {
+    	postsRepository.deleteById(dto.getPNo());
     }
     
     // ----------------------------------Mybatis----------------------------------- //
     
     // retrieve all or one post(s)
     @Transactional
-    public List<PostsListDto> findPost(Map<String, Object> param) {
-    	return postsMapper.retrieveAsPostsListDto(param);
+    public List<PostsListDto> findPost(PostsDto dto) {
+    	return postsMapper.retrieveAsPostsListDto(dto.getParam());
     }
 }

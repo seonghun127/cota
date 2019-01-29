@@ -10,7 +10,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
 //JPA Entity 클래스들이 아래 클래스 상속할 경우
 //필드들(createdDate, modifiedDate)도 컬럼으로 인식

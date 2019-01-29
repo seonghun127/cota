@@ -1,5 +1,7 @@
 package com.cota.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,12 +58,13 @@ public class Posts extends BaseTimeEntity{
 	
 	// 생성자 상단에 선언시 생성자에 포함된 필드만 빌더에 포함
 	@Builder
-	public Posts(Long pNo, String pTitle, String pContent, Long pUno, String pThumbnail) {
+	public Posts(Long pNo, String pTitle, String pContent, Long pUno, String pThumbnail, LocalDateTime createdDate) {
 		this.pNo = pNo;
 		this.pTitle = pTitle;
 		this.pContent = pContent;
 		this.pUno = pUno;
 		this.pThumbnail = pThumbnail;
+		super.setCreatedDate(createdDate);
 	}
 	
 }

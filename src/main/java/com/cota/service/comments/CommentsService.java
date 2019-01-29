@@ -1,4 +1,4 @@
-package com.cota.service;
+package com.cota.service.comments;
 
 import java.util.List;
 import java.util.Map;

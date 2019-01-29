@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cota.domain.Posts;
 import com.cota.dto.posts.*;
-import com.cota.service.PostsService;
+import com.cota.service.posts.PostsService;
 
 import lombok.AllArgsConstructor;
 
@@ -51,8 +51,10 @@ public class PostsController {
 		param.put("check", "one_post_details");
 		param.put("pNo", pNo);
 
+		dto.setParam(param);
+
 		// after saving, retrieve that post
-		List<PostsListDto> post = postsService.findPost(param);
+		List<PostsListDto> post = postsService.findPost(dto);
 
 		model.addAttribute("post", post);
 		
@@ -65,7 +67,6 @@ public class PostsController {
 	 * update posts
 	 * @param pNo
 	 * @param dto
-	 * @param ucBuilder
 	 * @return
 	 */
 	@CrossOrigin
@@ -74,16 +75,21 @@ public class PostsController {
 		@RequestBody PostsUpdateDto dto, Model model) {
 		logger.info("Updating Posts with pNo {}", pNo);
 		
-		// set pNo to match the post to be updated
 		dto.setPNo(pNo);
+		Posts findPost = postsService.findByPNo(dto);
+
+		dto.setCreatedDate(findPost.getCreatedDate());
+
 		Long _pNo = postsService.updatePost(dto);
 
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("check", "one_post_details");
-		param.put("pNo", _pNo);
+        param.put("pNo", _pNo);
+        
+        dto.setParam(param);
 
         // after saving, retrieve that post
-		List<PostsListDto> post = postsService.findPost(param);
+		List<PostsListDto> post = postsService.findPost(dto);
 
 		model.addAttribute("post", post);
 		
@@ -101,8 +107,11 @@ public class PostsController {
 	@DeleteMapping("/posts/{pNo}")
     public ResponseEntity<?> deletePosts(@PathVariable("pNo") long pNo) {
         logger.info("Deleting Posts with pNo {}", pNo);
-       
-		postsService.deletePostsById(pNo);
+		
+		PostsDeleteDto dto = new PostsDeleteDto();
+		dto.setPNo(pNo);
+
+		postsService.deletePostsById(dto);
 		
         return new ResponseEntity<Posts>(HttpStatus.NO_CONTENT);
     }
@@ -119,11 +128,15 @@ public class PostsController {
 		
 		logger.info("Retrieving All Posts!");
 
+		PostsListDto dto = new PostsListDto();
+
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("rowNum", rowNum);
 		param.put("check", "all_post_details");
 
-		List<PostsListDto> list = postsService.findPost(param);
+		dto.setParam(param);
+
+		List<PostsListDto> list = postsService.findPost(dto);
         
         return new ResponseEntity<List<PostsListDto>>(list, HttpStatus.OK);
     }

@@ -8,4 +8,6 @@ import com.cota.domain.Posts;
 
 public interface PostsRepository extends JpaRepository<Posts, Long> {
 
+    @Query("SELECT p FROM Posts p WHERE p.pNo = :pNo")
+    Posts findByPNo(@Param("pNo") Long pNo);
 }

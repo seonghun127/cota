@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PostsSaveDto{
+public class PostsSaveDto extends PostsDto{
 	
 	private String pTitle;
 	private String pContent;
@@ -18,6 +18,7 @@ public class PostsSaveDto{
 	private String pThumbnail;
 	
 	// change java entity to data entity for using repository method
+	@Override
 	public Posts toEntity(){
 		
         return Posts.builder()
