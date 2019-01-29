@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			u.u_email,
     		modified_date, 
     		p.p_thumbnail
-    	FROM posts as p join users as u on u_no = p_uno
+    	FROM posts as p join users as u on u.u_no = p.p_uno
 		<choose> 
 			<when test="check.equals('one_post_details')">
 			<!--> search one post whose pno equals #{pNo} <-->
