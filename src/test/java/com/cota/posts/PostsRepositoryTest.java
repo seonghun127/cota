@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.cota.domain.Posts;
 import com.cota.dto.posts.*;
 import com.cota.dto.users.UsersSaveDto;
 import com.cota.repository.PostsRepository;

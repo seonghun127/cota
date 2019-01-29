@@ -2,13 +2,10 @@ package com.cota.service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
-
-import com.cota.domain.Posts;
 import com.cota.dto.posts.*;
 import com.cota.mapper.PostsMapper;
 import com.cota.repository.PostsRepository;

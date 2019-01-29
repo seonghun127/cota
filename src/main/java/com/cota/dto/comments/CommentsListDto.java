@@ -20,11 +20,11 @@ public class CommentsListDto{
         u.u_name,
         u.u_email
     */
-    Long cNo;
-    String cContent;
-    Long cUno;
-    Date ModifiedDate;
-    Long uNo;
-    String uName;
-    String uEmail;
+    private Long cNo;
+    private String cContent;
+    private Long cUno;
+    private Date modifiedDate;
+    private Long uNo;
+    private String uName;
+    private String uEmail;
 }

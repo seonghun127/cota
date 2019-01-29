@@ -7,6 +7,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <!-- use mybatis to 'READ' database -->
 <mapper namespace="com.cota.mapper.PostsMapper">
     
+private Long pNo;
+	private String pTitle;
+	private String pContent;
+	private String uName;
+	private String uEmail;
+	private Date modifiedDate;
+	private String pThumbnail;
+
     <!-- retrieve data of post(s) -->
     <select id="retrieveAsPostsListDto" resultType="com.cota.dto.posts.PostsListDto">
     	SELECT 
@@ -17,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			u.u_email,
     		modified_date, 
     		p.p_thumbnail
-    	FROM posts as p join users as u on u.u_no = p.p_uno
+    	FROM posts AS p JOIN users AS u ON u.u_no = p.p_uno
 		<choose> 
 			<when test="check.equals('one_post_details')">
 			<!--> search one post whose pno equals #{pNo} <-->
