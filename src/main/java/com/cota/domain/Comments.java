@@ -1,5 +1,7 @@
 package com.cota.domain;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,11 +50,12 @@ public class Comments extends BaseTimeEntity{
 	private Long cUno;
 	
 	@Builder
-	public Comments (Long cNo, String cContent, Long cPno, Long cUno) {
+	public Comments (Long cNo, String cContent, Long cPno, Long cUno, LocalDateTime createdDate) {
 		this.cNo = cNo;
 		this.cContent = cContent;
 		this.cPno = cPno;
 		this.cUno = cUno;
+		super.setCreatedDate(createdDate);
 	}
 	
 }

@@ -10,7 +10,7 @@ public interface PostsService{
 
     public Posts findByPNo(PostsDto dto);
     
-    public Long save(PostsDto dto);
+    public Long savePost(PostsDto dto);
 
     public Long updatePost(PostsDto dto);
 

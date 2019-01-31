@@ -1,56 +1,20 @@
 package com.cota.service.comments;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.transaction.Transactional;
 
 import com.cota.domain.Comments;
-import com.cota.dto.comments.*;
-import com.cota.mapper.CommentsMapper;
-import com.cota.repository.CommentsRepository;
+import com.cota.dto.comments.CommentsDto;
+import com.cota.dto.comments.CommentsListDto;
 
-import org.springframework.stereotype.Service;
+public interface CommentsService{
 
-import lombok.AllArgsConstructor;
-
-@Service
-@AllArgsConstructor
-public class CommentsService{
-
-    // jpa
-    CommentsRepository commentsRepository;
-
-    // mybatis
-    CommentsMapper commentsMapper;
-
-    // ------------------------------------JPA-------------------------------------- //
-
-    @Transactional
-    public Comments findByCNo(Long cNo){
-        return commentsRepository.findByCNo(cNo);
-    }
+    public Comments findByCNo(CommentsDto dto);
     
-    @Transactional
-    public void deleteCommentsById(Long cNo){
-        commentsRepository.deleteById(cNo);
-    }
+    public void deleteCommentsById(CommentsDto dto);
 
-    @Transactional
-    public Long  saveComments(CommentsSaveDto dto){
-        return commentsRepository.save(dto.toEntity()).getCNo();
-    }
+    public Long  saveComments(CommentsDto dto);
 
-    @Transactional
-    public void updateComments(CommentsUpdateDto dto){
-        commentsRepository.save(dto.toEntity());
-    }
+    public void updateComments(CommentsDto dto);
 
-    // ----------------------------------Mybatis----------------------------------- //
-
-    @Transactional
-    public List<CommentsListDto> findComment(Map<String, Object> param) {
-    	return commentsMapper.retrieveAsCommentsListDto(param);
-    }
-
+    public List<CommentsListDto> findComment(CommentsDto dto);
 }

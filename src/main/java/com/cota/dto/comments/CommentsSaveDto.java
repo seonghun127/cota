@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CommentsSaveDto{
+public class CommentsSaveDto extends CommentsDto{
 
     private String cContent;
     private Long cPno;

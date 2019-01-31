@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.cota.domain.Comments;
 import com.cota.dto.comments.*;
 import com.cota.service.comments.CommentsService;
@@ -42,17 +40,20 @@ public class CommentsController{
 	@CrossOrigin
 	@GetMapping("/comments/{pNo}/{rowNum}")
 	public ResponseEntity<?> getCommentList (@PathVariable("pNo") Long pNo, 
-		@PathVariable("rowNum") int rowNum, HttpServletRequest request){
+		@PathVariable("rowNum") int rowNum){
 		
 		logger.info("Retrieving comments!");
-		//HttpSession session = request.getSession();
+
+		CommentsListDto dto = new CommentsListDto();
 
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("check", "all_comments_details");
 		param.put("pNo", pNo);
 		param.put("rowNum", rowNum);
 
-		List<CommentsListDto> list = commnetsService.findComment(param);
+		dto.setParam(param);
+
+		List<CommentsListDto> list = commnetsService.findComment(dto);
 
 		return new ResponseEntity<List<CommentsListDto>>(list, HttpStatus.OK);
 	}
@@ -67,9 +68,14 @@ public class CommentsController{
 	@CrossOrigin
 	@DeleteMapping("/comments/{cNo}")
     public ResponseEntity<?> deleteComments(@PathVariable("cNo") long cNo) {
-        logger.info("Deleting Comments with cNo {}", cNo);
+		logger.info("Deleting Comments with cNo {}", cNo);
+		
+		CommentsDeleteDto dto = new CommentsDeleteDto();
+
+		dto.setCNo(cNo);
        
-        commnetsService.deleteCommentsById(cNo);
+		commnetsService.deleteCommentsById(dto);
+		
         return new ResponseEntity<Comments>(HttpStatus.NO_CONTENT);
 	}
 
@@ -90,6 +96,10 @@ public class CommentsController{
 		
 		dto.setCNo(cNo);
 
+		Comments findComment = commnetsService.findByCNo(dto);
+
+		dto.setCreatedDate(findComment.getCreatedDate());
+
 		commnetsService.updateComments(dto);
 
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -105,7 +115,7 @@ public class CommentsController{
 	@CrossOrigin
 	@PostMapping("/comments")
 	public ResponseEntity<?> saveComments(@RequestBody CommentsSaveDto dto, Model model){
-		logger.info("Saving Posts with CommentsSaveDto : ", dto);
+		logger.info("Saving Comments with CommentsSaveDto : ", dto);
 		
 		Long cNo = commnetsService.saveComments(dto);
 
@@ -113,7 +123,9 @@ public class CommentsController{
 		param.put("check", "one_comment_details");
 		param.put("cNo", cNo);
 
-		List<CommentsListDto> comment = commnetsService.findComment(param);
+		dto.setParam(param);
+
+		List<CommentsListDto> comment = commnetsService.findComment(dto);
 		
 		model.addAttribute("comment", comment);
 

@@ -2,6 +2,8 @@ package com.cota.dto.comments;
 
 import java.util.Date;
 
+import com.cota.domain.Comments;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CommentsListDto{
+public class CommentsListDto extends CommentsDto{
     
     /*
         c.c_no,
@@ -27,4 +29,9 @@ public class CommentsListDto{
     private Long uNo;
     private String uName;
     private String uEmail;
+
+    @Override
+    public Comments toEntity() {
+        return null;
+    }
 }

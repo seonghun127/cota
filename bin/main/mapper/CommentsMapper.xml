@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<when test="check.equals('all_comments_details')"> 
 			<!--> search all comments in order of date, with ten data per call <-->
                 WHERE c.c_pno = #{pNo}
-				ORDER BY created_date DESC, modified_date DESC
+				ORDER BY created_date ASC, modified_date ASC
                 LIMIT #{rowNum, jdbcType=NUMERIC} , 10
 			</when>
 		</choose>

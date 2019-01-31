@@ -31,16 +31,13 @@ public class PostsServiceImpl implements PostsService{
     }
 
     @Transactional
-    public Long save(PostsDto dto){
-
+    public Long savePost(PostsDto dto){
         return postsRepository.save(dto.toEntity()).getPNo();
 
     }
     
-
     @Transactional
     public Long updatePost(PostsDto dto){
-
         return postsRepository.save(dto.toEntity()).getPNo();
     }
     

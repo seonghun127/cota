@@ -45,7 +45,7 @@ public class PostsController {
 		
 		logger.info("Saving Posts with PostsSaveDto : " + dto);
 		
-		Long pNo = postsService.save(dto);
+		Long pNo = postsService.savePost(dto);
 
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("check", "one_post_details");

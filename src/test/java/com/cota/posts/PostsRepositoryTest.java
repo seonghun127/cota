@@ -61,7 +61,7 @@ public class PostsRepositoryTest {
                 .pThumbnail("썸네일 주소")
                 .build();
     	
-        postsService.save(postsDto);
+        postsService.savePost(postsDto);
         
         Map<String, Object> param = new HashMap<String, Object>();
         param.put("check", "all_post_details");
