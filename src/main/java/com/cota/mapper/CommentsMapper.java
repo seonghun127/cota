@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface CommentsMapper{
     
     // read data for comments_list
-	List<CommentsListDto> retrieveAllAsCommentsListDto(Map<String, Object> param);
+	List<CommentsListDto> retrieveAsCommentsListDto(Map<String, Object> param);
 }

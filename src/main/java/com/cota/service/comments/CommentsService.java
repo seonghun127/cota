@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import com.cota.domain.Comments;
 import com.cota.dto.comments.*;
 import com.cota.mapper.CommentsMapper;
 import com.cota.repository.CommentsRepository;
@@ -26,13 +27,18 @@ public class CommentsService{
     // ------------------------------------JPA-------------------------------------- //
 
     @Transactional
+    public Comments findByCNo(Long cNo){
+        return commentsRepository.findByCNo(cNo);
+    }
+    
+    @Transactional
     public void deleteCommentsById(Long cNo){
         commentsRepository.deleteById(cNo);
     }
 
     @Transactional
-    public void saveComments(CommentsSaveDto dto){
-        commentsRepository.save(dto.toEntity());
+    public Long  saveComments(CommentsSaveDto dto){
+        return commentsRepository.save(dto.toEntity()).getCNo();
     }
 
     @Transactional
@@ -43,8 +49,8 @@ public class CommentsService{
     // ----------------------------------Mybatis----------------------------------- //
 
     @Transactional
-    public List<CommentsListDto> findAll(Map<String, Object> param) {
-    	return commentsMapper.retrieveAllAsCommentsListDto(param);
+    public List<CommentsListDto> findComment(Map<String, Object> param) {
+    	return commentsMapper.retrieveAsCommentsListDto(param);
     }
 
 }

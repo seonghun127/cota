@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <!-- use mybatis to 'READ' database -->
 <mapper namespace="com.cota.mapper.CommentsMapper">
 
-    <select id="retrieveAllAsCommentsListDto" resultType = "com.cota.dto.comments.CommentsListDto">
+    <select id="retrieveAsCommentsListDto" resultType = "com.cota.dto.comments.CommentsListDto">
         SELECT 
             c.c_no,
             c.c_content,
@@ -18,9 +18,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             u.u_email
         FROM users AS u JOIN comments AS c 
         ON c.c_uno = u.u_no
-        WHERE c.c_pno = #{pNo}
-        ORDER BY created_date DESC, modified_date DESC
-        LIMIT #{rowNum, jdbcType=NUMERIC} , 10
+        <choose> 
+			<when test="check.equals('one_comment_details')">
+			<!--> search one comment whose pno equals #{cNo} <-->
+				 WHERE c.c_no = #{cNo}						
+			</when> 
+			<when test="check.equals('all_comments_details')"> 
+			<!--> search all comments in order of date, with ten data per call <-->
+                WHERE c.c_pno = #{pNo}
+				ORDER BY created_date DESC, modified_date DESC
+                LIMIT #{rowNum, jdbcType=NUMERIC} , 10
+			</when>
+		</choose>
     </select>
 
 </mapper>

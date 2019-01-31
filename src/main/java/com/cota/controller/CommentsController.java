@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,10 +48,11 @@ public class CommentsController{
 		//HttpSession session = request.getSession();
 
 		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("check", "all_comments_details");
 		param.put("pNo", pNo);
 		param.put("rowNum", rowNum);
 
-		List<CommentsListDto> list = commnetsService.findAll(param);
+		List<CommentsListDto> list = commnetsService.findComment(param);
 
 		return new ResponseEntity<List<CommentsListDto>>(list, HttpStatus.OK);
 	}
@@ -102,12 +104,20 @@ public class CommentsController{
 	 */
 	@CrossOrigin
 	@PostMapping("/comments")
-	public ResponseEntity<?> saveComments(@RequestBody CommentsSaveDto dto){
+	public ResponseEntity<?> saveComments(@RequestBody CommentsSaveDto dto, Model model){
 		logger.info("Saving Posts with CommentsSaveDto : ", dto);
 		
-		commnetsService.saveComments(dto);
+		Long cNo = commnetsService.saveComments(dto);
+
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("check", "one_comment_details");
+		param.put("cNo", cNo);
+
+		List<CommentsListDto> comment = commnetsService.findComment(param);
 		
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		model.addAttribute("comment", comment);
+
+		return new ResponseEntity<>(comment, HttpStatus.CREATED);
 	}
 
 	// ------------------------------------------------------------------------------ //
